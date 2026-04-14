@@ -1,0 +1,604 @@
+"use client";
+
+import Image from "next/image";
+import Link from "next/link";
+import { motion, useScroll, useTransform } from "motion/react";
+import {
+  Briefcase,
+  Globe,
+  Heart,
+  Mountain,
+  Sparkles,
+  Users,
+  Video,
+} from "lucide-react";
+import { useSiteTheme } from "@/components/theme-context";
+import { ImageWithFallback } from "@/components/scotland/image-with-fallback";
+
+const LOGO_SRC = "/images/logos/scotland-yoga-day-logo.png";
+
+export function ScotlandSite() {
+  const { theme, toggleTheme } = useSiteTheme();
+  const { scrollY } = useScroll();
+  const headerOpacity = useTransform(scrollY, [0, 100], [0, 1]);
+
+  const navItems = [
+    { name: "Home", href: "#home" },
+    { name: "The Event", href: "#event" },
+    { name: "Corporate Wellness", href: "#corporate" },
+    { name: "Origins", href: "#origins" },
+    { name: "Impact", href: "#impact" },
+    { name: "Gallery", href: "#gallery" },
+    { name: "Get Involved", href: "#involved" },
+  ];
+
+  const pillars = [
+    {
+      icon: Heart,
+      title: "Community Vitality",
+      description:
+        "Making wellness accessible to every corner of Scotland, regardless of age, ability, or background.",
+    },
+    {
+      icon: Briefcase,
+      title: "Workplace Bliss",
+      description:
+        "Partnering with Scotland's leading industries to tackle workplace stress and promote a culture of health.",
+    },
+    {
+      icon: Sparkles,
+      title: "The Fun Pose",
+      description:
+        "Bringing joy and playfulness to wellness through celebration and community connection.",
+    },
+  ];
+
+  const events = [
+    {
+      icon: Mountain,
+      title: "The Great Scottish Sun Salutation",
+      description: "A massive, synchronized flow at the foot of Stirling Castle.",
+    },
+    {
+      icon: Globe,
+      title: "The Wellness Symposium",
+      description:
+        "A professional forum featuring experts on mindfulness, ergonomics, and mental health.",
+    },
+    {
+      icon: Users,
+      title: "Forest Bathing & Flow",
+      description: "Immersive experiences in the Cairngorms and Trossachs.",
+    },
+    {
+      icon: Video,
+      title: "Digital Sanctuary",
+      description:
+        "A high-end virtual stream for those joining from remote areas or the office.",
+    },
+  ];
+
+  return (
+    <div className="min-h-screen overflow-x-hidden bg-background text-foreground">
+      <motion.button
+        type="button"
+        onClick={toggleTheme}
+        className="fixed top-6 right-6 z-50 rounded-full px-6 py-3 shadow-lg transition-colors"
+        style={{
+          backgroundColor: theme === "traditional" ? "#6b4c9a" : "#d97706",
+          color: "white",
+        }}
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+      >
+        Switch to {theme === "traditional" ? "Modern" : "Traditional"} Theme
+      </motion.button>
+
+      <motion.nav
+        className="fixed top-0 right-0 left-0 z-40 border-b backdrop-blur-md"
+        style={{
+          opacity: headerOpacity,
+          borderColor: "var(--border)",
+          backgroundColor: "rgba(255, 255, 255, 0.8)",
+        }}
+      >
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3">
+          <div className="flex items-center gap-3">
+            <Image
+              src={LOGO_SRC}
+              alt="Scotland's International Yoga Day"
+              width={160}
+              height={48}
+              className="h-12 w-auto"
+              priority
+            />
+          </div>
+          <div className="hidden gap-8 md:flex">
+            {navItems.map((item) => (
+              <a
+                key={item.name}
+                href={item.href}
+                className="transition-opacity hover:opacity-70"
+                style={{ fontSize: "0.9rem" }}
+              >
+                {item.name}
+              </a>
+            ))}
+          </div>
+        </div>
+      </motion.nav>
+
+      <section id="home" className="relative flex min-h-screen items-center">
+        <div className="absolute inset-0 overflow-hidden">
+          <motion.div
+            initial={{ scale: 1.1 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 1.5, ease: "easeOut" }}
+            className="h-full w-full"
+          >
+            <ImageWithFallback
+              src="https://images.unsplash.com/photo-1738084843875-48f8118c87af?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwyfHx5b2dhJTIwcHJhY3RpY2UlMjBzdW5yaXNlJTIwbWVkaXRhdGlvbiUyMHBlYWNlZnVsfGVufDF8fHx8MTc3NTgzMzIzM3ww&ixlib=rb-4.1.0&q=80&w=1080"
+              alt="Yoga practice at sunrise - peaceful meditation"
+              className="h-full w-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-black/30" />
+          </motion.div>
+        </div>
+
+        <div className="relative z-10 mx-auto max-w-7xl px-6 py-32">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="max-w-3xl"
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className="mb-8"
+            >
+              <Image
+                src={LOGO_SRC}
+                alt="Scotland's International Yoga Day"
+                width={280}
+                height={112}
+                className="h-32 w-auto"
+                priority
+              />
+            </motion.div>
+            <motion.h1
+              className="mb-6 text-white"
+              style={{
+                fontSize: "clamp(2.5rem, 6vw, 5rem)",
+                fontWeight: 700,
+                lineHeight: 1.1,
+              }}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.5 }}
+            >
+              Scotland&apos;s International Yoga Day 2026
+            </motion.h1>
+            <motion.p
+              className="mb-8 text-white/90"
+              style={{ fontSize: "clamp(1.1rem, 2vw, 1.4rem)", lineHeight: 1.6 }}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.7 }}
+            >
+              From the Highlands to the Lowlands, join thousands of
+              practitioners, families, and community members for Scotland&apos;s
+              largest celebration of Yoga and mental wellbeing.
+            </motion.p>
+            <motion.div
+              className="flex flex-wrap gap-4"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.9 }}
+            >
+              <button
+                type="button"
+                className="rounded-lg px-8 py-4 text-white transition-transform hover:scale-105"
+                style={{
+                  backgroundColor: "var(--primary)",
+                  fontSize: "1.1rem",
+                  fontWeight: 600,
+                }}
+              >
+                Scottish Hindu Foundation
+              </button>
+              <button
+                type="button"
+                className="rounded-lg px-8 py-4 transition-transform hover:scale-105"
+                style={{
+                  backgroundColor: "white",
+                  color: "var(--primary)",
+                  fontSize: "1.1rem",
+                  fontWeight: 600,
+                }}
+              >
+                The Shankaracharya Foundation
+              </button>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      <section id="event" className="px-6 py-24">
+        <div className="mx-auto max-w-6xl">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="mb-16 text-center"
+          >
+            <h2
+              className="mb-6"
+              style={{
+                fontSize: "clamp(2rem, 4vw, 3.5rem)",
+                fontWeight: 700,
+                color: "var(--primary)",
+              }}
+            >
+              Elevating Scotland
+            </h2>
+            <p
+              className="mx-auto mb-6 max-w-4xl"
+              style={{
+                fontSize: "1.2rem",
+                lineHeight: 1.8,
+                color: "var(--foreground)",
+              }}
+            >
+              On June 20th, Scotland joins the global community to celebrate
+              International Yoga Day. This isn&apos;t just a series of classes;
+              it is a coordinated national movement designed to improve the
+              physical and mental resilience for all.
+            </p>
+            <p
+              className="mx-auto max-w-4xl"
+              style={{
+                fontSize: "1.2rem",
+                lineHeight: 1.8,
+                color: "var(--foreground)",
+              }}
+            >
+              Through our flagship event at The Pyramid, Glasgow alongside
+              hundreds of community-led gatherings, we are bridging the gap
+              between ancient tradition and modern Scottish life.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      <section
+        id="origins"
+        className="px-6 py-24"
+        style={{ backgroundColor: "var(--muted)" }}
+      >
+        <div className="mx-auto max-w-7xl">
+          <motion.h2
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mb-16 text-center"
+            style={{
+              fontSize: "clamp(2rem, 4vw, 3rem)",
+              fontWeight: 700,
+              color: "var(--primary)",
+            }}
+          >
+            Our Three Pillars
+          </motion.h2>
+          <div className="grid gap-12 md:grid-cols-3">
+            {pillars.map((pillar, index) => (
+              <motion.div
+                key={pillar.title}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: index * 0.2 }}
+                whileHover={{ y: -8 }}
+                className="text-center"
+              >
+                <div
+                  className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full"
+                  style={{ backgroundColor: "var(--accent)" }}
+                >
+                  <pillar.icon
+                    size={36}
+                    style={{ color: "var(--accent-foreground)" }}
+                  />
+                </div>
+                <h3
+                  className="mb-4"
+                  style={{
+                    fontSize: "1.5rem",
+                    fontWeight: 600,
+                    color: "var(--foreground)",
+                  }}
+                >
+                  {pillar.title}
+                </h3>
+                <p
+                  style={{
+                    fontSize: "1.05rem",
+                    lineHeight: 1.7,
+                    color: "var(--muted-foreground)",
+                  }}
+                >
+                  {pillar.description}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="corporate" className="px-6 py-24">
+        <div className="mx-auto max-w-5xl">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <h2
+              className="mb-8 text-center"
+              style={{
+                fontSize: "clamp(2rem, 4vw, 3rem)",
+                fontWeight: 700,
+                color: "var(--primary)",
+              }}
+            >
+              Align with Wellbeing
+            </h2>
+            <p
+              className="mx-auto mb-8 max-w-3xl text-center"
+              style={{ fontSize: "1.15rem", lineHeight: 1.7 }}
+            >
+              Showcase your organization&apos;s commitment to Corporate Social
+              Responsibility (CSR) and employee health. Scotland&apos;s
+              International Yoga Day offers a unique platform to reach an
+              engaged, health-conscious audience.
+            </p>
+            <div
+              className="mb-12 rounded-2xl p-8 text-center"
+              style={{ backgroundColor: "var(--muted)" }}
+            >
+              <p
+                style={{
+                  fontSize: "1.6rem",
+                  fontStyle: "italic",
+                  color: "var(--primary)",
+                  fontWeight: 500,
+                }}
+              >
+                &ldquo;Investing in the health of our nation is the most
+                sustainable investment a business can make.&rdquo;
+              </p>
+            </div>
+
+            <h3
+              className="mb-8"
+              style={{
+                fontSize: "1.8rem",
+                fontWeight: 600,
+                color: "var(--foreground)",
+              }}
+            >
+              Why Partner With Us?
+            </h3>
+            <div className="mb-10 grid gap-8 md:grid-cols-3">
+              {[
+                {
+                  title: "Brand Visibility",
+                  desc: "National press coverage and high-traffic digital placement.",
+                },
+                {
+                  title: "Employee Engagement",
+                  desc: 'Exclusive "Corporate Wellness Packages" for your staff.',
+                },
+                {
+                  title: "Social Impact",
+                  desc: 'Support local mental health charities through our "Yoga for All" fund.',
+                },
+              ].map((item, index) => (
+                <motion.div
+                  key={item.title}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: index * 0.15 }}
+                  className="rounded-xl p-6"
+                  style={{
+                    backgroundColor: "var(--background)",
+                    border: "2px solid var(--border)",
+                  }}
+                >
+                  <h4
+                    className="mb-3"
+                    style={{
+                      fontSize: "1.3rem",
+                      fontWeight: 600,
+                      color: "var(--primary)",
+                    }}
+                  >
+                    {item.title}
+                  </h4>
+                  <p style={{ fontSize: "1.05rem", lineHeight: 1.6 }}>
+                    {item.desc}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+            <div className="text-center">
+              <button
+                type="button"
+                className="rounded-lg px-10 py-4 text-white transition-transform hover:scale-105"
+                style={{
+                  backgroundColor: "var(--secondary)",
+                  fontSize: "1.1rem",
+                  fontWeight: 600,
+                }}
+              >
+                View Partnership Opportunities
+              </button>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      <section id="impact" className="px-6 py-24">
+        <div className="mx-auto max-w-5xl text-center">
+          <motion.h2
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mb-4"
+            style={{
+              fontSize: "clamp(2rem, 4vw, 3rem)",
+              fontWeight: 700,
+              color: "var(--primary)",
+            }}
+          >
+            Impact
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mx-auto max-w-3xl"
+            style={{ fontSize: "1.15rem", lineHeight: 1.75 }}
+          >
+            National coordination, community partners, and workplace programmes
+            together expand access to evidence-based wellbeing practices across
+            Scotland.
+          </motion.p>
+        </div>
+      </section>
+
+      <section
+        id="gallery"
+        className="px-6 py-24"
+        style={{ backgroundColor: "var(--muted)" }}
+      >
+        <div className="mx-auto max-w-7xl">
+          <motion.h2
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mb-16 text-center"
+            style={{
+              fontSize: "clamp(2rem, 4vw, 3rem)",
+              fontWeight: 700,
+              color: "var(--primary)",
+            }}
+          >
+            Event Highlights
+          </motion.h2>
+          <div className="grid gap-8 md:grid-cols-2">
+            {events.map((event, index) => (
+              <motion.div
+                key={event.title}
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                whileHover={{ scale: 1.03 }}
+                className="rounded-2xl p-8"
+                style={{ backgroundColor: "var(--background)" }}
+              >
+                <div
+                  className="mb-6 flex h-16 w-16 items-center justify-center rounded-full"
+                  style={{ backgroundColor: "var(--accent)" }}
+                >
+                  <event.icon
+                    size={28}
+                    style={{ color: "var(--accent-foreground)" }}
+                  />
+                </div>
+                <h3
+                  className="mb-4"
+                  style={{
+                    fontSize: "1.5rem",
+                    fontWeight: 600,
+                    color: "var(--foreground)",
+                  }}
+                >
+                  {event.title}
+                </h3>
+                <p
+                  style={{
+                    fontSize: "1.05rem",
+                    lineHeight: 1.7,
+                    color: "var(--muted-foreground)",
+                  }}
+                >
+                  {event.description}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <footer
+        id="involved"
+        className="px-6 py-20"
+        style={{ backgroundColor: "var(--primary)" }}
+      >
+        <div className="mx-auto max-w-4xl text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="mb-4 text-white" style={{ fontSize: "2.5rem", fontWeight: 700 }}>
+              Stay Informed
+            </h2>
+            <p
+              className="mb-8 text-white/90"
+              style={{ fontSize: "1.15rem", lineHeight: 1.7 }}
+            >
+              Sign up for the latest schedule releases, instructor announcements,
+              and early-bird registration.
+            </p>
+            <div className="mx-auto flex max-w-xl gap-4">
+              <input
+                type="email"
+                placeholder="Your email address"
+                className="flex-1 rounded-lg px-6 py-4"
+                style={{ fontSize: "1rem" }}
+              />
+              <button
+                type="button"
+                className="rounded-lg px-8 py-4 transition-transform hover:scale-105"
+                style={{
+                  backgroundColor: "var(--accent)",
+                  color: "var(--accent-foreground)",
+                  fontSize: "1rem",
+                  fontWeight: 600,
+                }}
+              >
+                Subscribe
+              </button>
+            </div>
+            <p className="mt-8 text-sm text-white/80">
+              <Link href="/info" className="underline underline-offset-4 hover:text-white">
+                Text-only details
+              </Link>
+            </p>
+            <div className="mt-12 border-t border-white/20 pt-8 text-white/70">
+              <p style={{ fontSize: "0.95rem" }}>
+                © 2026 Scotland&apos;s International Yoga Day. All rights reserved.
+              </p>
+            </div>
+          </motion.div>
+        </div>
+      </footer>
+    </div>
+  );
+}
