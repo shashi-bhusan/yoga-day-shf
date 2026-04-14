@@ -114,8 +114,8 @@ export function ScotlandSite() {
             <Image
               src={LOGO_SRC}
               alt="Scotland's International Yoga Day"
-              width={160}
-              height={48}
+              width={666}
+              height={375}
               className="h-10 w-auto sm:h-12"
               priority
             />
@@ -178,8 +178,8 @@ export function ScotlandSite() {
               <Image
                 src={LOGO_SRC}
                 alt="Scotland's International Yoga Day"
-                width={280}
-                height={112}
+                width={666}
+                height={375}
                 className="h-28 w-auto sm:h-32"
                 priority
               />
