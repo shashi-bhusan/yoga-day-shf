@@ -686,7 +686,9 @@ export function ScotlandSite() {
             </p>
             <div className="mt-12 border-t border-white/20 pt-8 text-white/70">
               <p style={{ fontSize: "0.95rem" }}>
-                © 2026 Scotland&apos;s International Yoga Day. All rights reserved.
+                {
+                  "© 2026 Designed and Maintained by beenaIT Solutions. All rights reserved."
+                }
               </p>
             </div>
           </motion.div>
