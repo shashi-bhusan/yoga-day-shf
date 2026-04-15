@@ -10,7 +10,7 @@ On June 20th, Scotland joins the global community to celebrate International Yog
 
 Through our flagship event at The Pyramid, Glasgow alongside hundreds of community-led gatherings, we are bridging the gap between ancient tradition and modern Scottish life.
 
-## Our Three Pillars
+## Our Framework
 
 ### Community Vitality
 

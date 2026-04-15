@@ -2,44 +2,28 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion, useScroll, useTransform } from "motion/react";
+import { motion } from "motion/react";
 import {
+  BookOpen,
   Briefcase,
   Globe,
   Heart,
   Mountain,
   Sparkles,
-  SunMoon,
   Users,
   Video,
 } from "lucide-react";
-import { useSiteTheme } from "@/components/theme-context";
 import { ImageWithFallback } from "@/components/scotland/image-with-fallback";
+import { ScotlandSiteHeader } from "@/components/scotland/scotland-site-header";
 import { TheEventTabs } from "@/components/scotland/the-event-tabs";
-import { SchoolsYogaTourSection } from "@/components/scotland/schools-yoga-tour-section";
-import { OriginsSection } from "@/components/scotland/origins-section";
-import { ImpactSection } from "@/components/scotland/impact-section";
-
 const LOGO_SRC = "/images/logos/scotland-yoga-day-logo.png";
-const EVENTBRITE_URL = "https://www.eventbrite.co.uk";
+const EVENTBRITE_URL =
+  "https://www.eventbrite.co.uk/e/1987392705080?aff=oddtdtcreator";
+const YEARBOOK_2025_URL =
+  "https://online.fliphtml5.com/msyzm/ugee/index.html";
+const YEARBOOK_2024_URL = "https://online.fliphtml5.com/msyzm/jspc/";
 
 export function ScotlandSite() {
-  const { theme, toggleTheme } = useSiteTheme();
-  const { scrollY } = useScroll();
-  const headerOpacity = useTransform(scrollY, [0, 100], [0, 1]);
-
-  const navItems = [
-    { name: "Home", href: "#home" },
-    { name: "The Event", href: "#event" },
-    { name: "Schools Tour", href: "#schools" },
-    { name: "Our Pillars", href: "#pillars" },
-    { name: "Corporate", href: "#corporate" },
-    { name: "Highlights", href: "#gallery" },
-    { name: "Origins", href: "#origins" },
-    { name: "Impact", href: "#impact" },
-    { name: "Get Involved", href: "#involved" },
-  ];
-
   const pillars = [
     {
       icon: Heart,
@@ -86,73 +70,9 @@ export function ScotlandSite() {
     },
   ];
 
-  const themeToggleLabel =
-    theme === "traditional"
-      ? "Switch to modern theme"
-      : "Switch to traditional theme";
-
   return (
     <div className="min-h-screen overflow-x-hidden bg-background text-foreground">
-      <motion.button
-        type="button"
-        onClick={toggleTheme}
-        className="fixed top-3 right-3 z-50 flex h-11 w-11 items-center justify-center rounded-full border border-foreground/15 bg-background/95 text-foreground shadow-md backdrop-blur-md sm:top-4 sm:right-4 sm:h-12 sm:w-12"
-        aria-label={themeToggleLabel}
-        title={themeToggleLabel}
-        whileHover={{ scale: 1.06 }}
-        whileTap={{ scale: 0.94 }}
-      >
-        <SunMoon className="h-5 w-5 sm:h-[1.35rem] sm:w-[1.35rem]" aria-hidden />
-      </motion.button>
-
-      <motion.nav
-        aria-label="Primary"
-        className="fixed top-0 right-0 left-0 z-40 border-b backdrop-blur-md"
-        style={{
-          opacity: headerOpacity,
-          borderColor: "var(--border)",
-          backgroundColor: "rgba(255, 255, 255, 0.88)",
-        }}
-      >
-        <div className="mx-auto max-w-7xl px-4 py-1 pr-14 sm:px-6 sm:py-1 sm:pr-16 lg:pr-20">
-          <div className="flex flex-col gap-1.5 sm:gap-2 lg:flex-row lg:items-center lg:gap-4">
-            <div className="relative z-10 flex min-w-0 shrink-0 items-center">
-              <Image
-                src={LOGO_SRC}
-                alt="Scotland's International Yoga Day"
-                width={666}
-                height={375}
-                className="h-16 w-auto sm:h-20 lg:h-24"
-                priority
-              />
-            </div>
-            <div className="hidden min-h-0 min-w-0 flex-1 items-center justify-center lg:flex">
-              <div className="flex max-w-full flex-wrap items-center justify-center gap-x-3 gap-y-1 text-[0.8125rem] font-medium leading-tight tracking-wide text-foreground/85 sm:gap-x-4 sm:text-sm xl:gap-x-5 xl:text-[0.9375rem]">
-                {navItems.map((item) => (
-                  <a
-                    key={item.name}
-                    href={item.href}
-                    className="whitespace-nowrap rounded-sm px-0.5 transition-colors hover:text-foreground"
-                  >
-                    {item.name}
-                  </a>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="flex flex-wrap justify-center gap-x-2.5 gap-y-0.5 border-t border-foreground/10 px-3 py-1 text-[0.8125rem] font-medium leading-tight text-foreground/85 sm:gap-x-3 sm:text-sm lg:hidden">
-          {navItems.map((item) => (
-            <a
-              key={item.name}
-              href={item.href}
-              className="underline-offset-2 transition-colors hover:text-foreground hover:underline"
-            >
-              {item.name}
-            </a>
-          ))}
-        </div>
-      </motion.nav>
+      <ScotlandSiteHeader />
 
       <section id="home" className="relative flex min-h-screen items-center pt-24">
         <div className="absolute inset-0 overflow-hidden">
@@ -171,7 +91,7 @@ export function ScotlandSite() {
           </motion.div>
         </div>
 
-        <div className="relative z-10 mx-auto max-w-7xl px-6 py-24">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-24">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
@@ -254,7 +174,7 @@ export function ScotlandSite() {
         </div>
       </section>
 
-      <section id="event" className="scroll-mt-28 px-6 py-24">
+      <section id="event" className="scroll-mt-28 px-4 sm:px-6 py-24">
         <div className="mx-auto max-w-6xl">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
@@ -305,17 +225,17 @@ export function ScotlandSite() {
 
       <section
         id="schools"
-        className="scroll-mt-28 px-6 py-24"
+        className="scroll-mt-28 px-4 sm:px-6 py-16"
         style={{ backgroundColor: "var(--muted)" }}
       >
-        <div className="mx-auto max-w-6xl">
+        <div className="mx-auto max-w-3xl text-center">
           <motion.h2
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="mb-4 text-center"
+            className="mb-4"
             style={{
-              fontSize: "clamp(2rem, 4vw, 3rem)",
+              fontSize: "clamp(1.75rem, 3.5vw, 2.5rem)",
               fontWeight: 700,
               color: "var(--primary)",
             }}
@@ -326,9 +246,9 @@ export function ScotlandSite() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="mx-auto mb-12 max-w-2xl text-center"
+            className="mb-8"
             style={{
-              fontSize: "1.1rem",
+              fontSize: "1.05rem",
               lineHeight: 1.65,
               color: "var(--muted-foreground)",
             }}
@@ -336,11 +256,17 @@ export function ScotlandSite() {
             Workshops for students — mindfulness, resilience, and teamwork in
             schools across Scotland.
           </motion.p>
-          <SchoolsYogaTourSection />
+          <Link
+            href="/schools-tour"
+            className="inline-flex items-center justify-center rounded-lg px-6 py-3 text-center font-semibold text-white transition-transform hover:scale-[1.02]"
+            style={{ backgroundColor: "var(--secondary)" }}
+          >
+            Explore the Schools Yoga Tour
+          </Link>
         </div>
       </section>
 
-      <section id="pillars" className="scroll-mt-28 px-6 py-24">
+      <section id="pillars" className="scroll-mt-28 px-4 sm:px-6 py-24">
         <div className="mx-auto max-w-7xl">
           <motion.h2
             initial={{ opacity: 0, y: 30 }}
@@ -353,7 +279,7 @@ export function ScotlandSite() {
               color: "var(--primary)",
             }}
           >
-            Our three pillars
+            Our Framework
           </motion.h2>
           <div className="grid gap-12 md:grid-cols-3">
             {pillars.map((pillar, index) => (
@@ -400,121 +326,48 @@ export function ScotlandSite() {
         </div>
       </section>
 
-      <section id="corporate" className="scroll-mt-28 px-6 py-24">
-        <div className="mx-auto max-w-5xl">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
+      <section id="corporate" className="scroll-mt-28 px-4 sm:px-6 py-16">
+        <div className="mx-auto max-w-3xl text-center">
+          <motion.h2
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
+            className="mb-4"
+            style={{
+              fontSize: "clamp(1.75rem, 3.5vw, 2.5rem)",
+              fontWeight: 700,
+              color: "var(--primary)",
+            }}
           >
-            <h2
-              className="mb-8 text-center"
-              style={{
-                fontSize: "clamp(2rem, 4vw, 3rem)",
-                fontWeight: 700,
-                color: "var(--primary)",
-              }}
-            >
-              Align with wellbeing
-            </h2>
-            <p
-              className="mx-auto mb-8 max-w-3xl text-center"
-              style={{ fontSize: "1.15rem", lineHeight: 1.7 }}
-            >
-              Showcase your organization&apos;s commitment to Corporate Social
-              Responsibility (CSR) and employee health. Scotland&apos;s
-              International Yoga Day offers a unique platform to reach an engaged,
-              health-conscious audience.
-            </p>
-            <div
-              className="mb-12 rounded-2xl p-8 text-center"
-              style={{ backgroundColor: "var(--muted)" }}
-            >
-              <p
-                style={{
-                  fontSize: "1.6rem",
-                  fontStyle: "italic",
-                  color: "var(--primary)",
-                  fontWeight: 500,
-                }}
-              >
-                &ldquo;Investing in the health of our nation is the most sustainable
-                investment a business can make.&rdquo;
-              </p>
-            </div>
-
-            <h3
-              className="mb-8"
-              style={{
-                fontSize: "1.8rem",
-                fontWeight: 600,
-                color: "var(--foreground)",
-              }}
-            >
-              Why partner with us?
-            </h3>
-            <div className="mb-10 grid gap-8 md:grid-cols-3">
-              {[
-                {
-                  title: "Brand visibility",
-                  desc: "National press coverage and high-traffic digital placement.",
-                },
-                {
-                  title: "Employee engagement",
-                  desc: 'Exclusive "Corporate Wellness Packages" for your staff.',
-                },
-                {
-                  title: "Social impact",
-                  desc: 'Support local mental health charities through our "Yoga for All" fund.',
-                },
-              ].map((item, index) => (
-                <motion.div
-                  key={item.title}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: index * 0.15 }}
-                  className="rounded-xl p-6"
-                  style={{
-                    backgroundColor: "var(--background)",
-                    border: "2px solid var(--border)",
-                  }}
-                >
-                  <h4
-                    className="mb-3"
-                    style={{
-                      fontSize: "1.3rem",
-                      fontWeight: 600,
-                      color: "var(--primary)",
-                    }}
-                  >
-                    {item.title}
-                  </h4>
-                  <p style={{ fontSize: "1.05rem", lineHeight: 1.6 }}>{item.desc}</p>
-                </motion.div>
-              ))}
-            </div>
-            <div className="text-center">
-              <button
-                type="button"
-                className="rounded-lg px-10 py-4 text-white transition-transform hover:scale-105"
-                style={{
-                  backgroundColor: "var(--secondary)",
-                  fontSize: "1.1rem",
-                  fontWeight: 600,
-                }}
-              >
-                View partnership opportunities
-              </button>
-            </div>
-          </motion.div>
+            Align with wellbeing
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mb-8"
+            style={{
+              fontSize: "1.05rem",
+              lineHeight: 1.65,
+              color: "var(--muted-foreground)",
+            }}
+          >
+            Corporate Social Responsibility, employee wellbeing, and partnership
+            opportunities with Scotland&apos;s International Yoga Day.
+          </motion.p>
+          <Link
+            href="/corporate"
+            className="inline-flex items-center justify-center rounded-lg px-6 py-3 text-center font-semibold text-white transition-transform hover:scale-[1.02]"
+            style={{ backgroundColor: "var(--secondary)" }}
+          >
+            Corporate &amp; partnerships
+          </Link>
         </div>
       </section>
 
       <section
         id="gallery"
-        className="scroll-mt-28 px-6 py-24"
+        className="scroll-mt-28 px-4 sm:px-6 py-24"
         style={{ backgroundColor: "var(--muted)" }}
       >
         <div className="mx-auto max-w-7xl">
@@ -574,41 +427,187 @@ export function ScotlandSite() {
               </motion.div>
             ))}
           </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.15 }}
+            className="mx-auto mt-20 max-w-5xl"
+          >
+            <h3
+              className="mb-4 text-center"
+              style={{
+                fontSize: "clamp(1.5rem, 3vw, 2rem)",
+                fontWeight: 700,
+                color: "var(--primary)",
+              }}
+            >
+              Souvenir
+            </h3>
+            <p
+              className="mx-auto mb-10 max-w-2xl text-center"
+              style={{
+                fontSize: "1.05rem",
+                lineHeight: 1.65,
+                color: "var(--muted-foreground)",
+              }}
+            >
+              Digital souvenir flipbooks from past Scotland&apos;s International Yoga
+              Day celebrations. Each link opens in a new browser tab.
+            </p>
+            <div className="grid gap-8 md:grid-cols-2">
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="flex flex-col rounded-2xl p-8"
+                style={{ backgroundColor: "var(--background)" }}
+              >
+                <div
+                  className="mb-5 flex h-14 w-14 items-center justify-center rounded-full"
+                  style={{ backgroundColor: "var(--accent)" }}
+                >
+                  <BookOpen
+                    size={26}
+                    style={{ color: "var(--accent-foreground)" }}
+                  />
+                </div>
+                <h4
+                  className="mb-3"
+                  style={{
+                    fontSize: "1.35rem",
+                    fontWeight: 600,
+                    color: "var(--foreground)",
+                  }}
+                >
+                  2025 edition
+                </h4>
+                <p
+                  className="mb-6 flex-1"
+                  style={{
+                    fontSize: "1.05rem",
+                    lineHeight: 1.65,
+                    color: "var(--muted-foreground)",
+                  }}
+                >
+                  Highlights and memories from the 2025 celebration.
+                </p>
+                <a
+                  href={YEARBOOK_2025_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center rounded-lg px-6 py-3 text-center font-semibold text-white transition-transform hover:scale-[1.02]"
+                  style={{ backgroundColor: "var(--primary)" }}
+                >
+                  Open 2025 flipbook
+                </a>
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.05 }}
+                className="flex flex-col rounded-2xl p-8"
+                style={{ backgroundColor: "var(--background)" }}
+              >
+                <div
+                  className="mb-5 flex h-14 w-14 items-center justify-center rounded-full"
+                  style={{ backgroundColor: "var(--accent)" }}
+                >
+                  <BookOpen
+                    size={26}
+                    style={{ color: "var(--accent-foreground)" }}
+                  />
+                </div>
+                <h4
+                  className="mb-3"
+                  style={{
+                    fontSize: "1.35rem",
+                    fontWeight: 600,
+                    color: "var(--foreground)",
+                  }}
+                >
+                  2024 edition
+                </h4>
+                <p
+                  className="mb-6 flex-1"
+                  style={{
+                    fontSize: "1.05rem",
+                    lineHeight: 1.65,
+                    color: "var(--muted-foreground)",
+                  }}
+                >
+                  Look back at the 2024 programme and community moments.
+                </p>
+                <a
+                  href={YEARBOOK_2024_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center rounded-lg px-6 py-3 text-center font-semibold text-white transition-transform hover:scale-[1.02]"
+                  style={{ backgroundColor: "var(--secondary)" }}
+                >
+                  Open 2024 flipbook
+                </a>
+              </motion.div>
+            </div>
+          </motion.div>
         </div>
       </section>
 
-      <section id="origins" className="scroll-mt-28 px-6 py-24">
-        <div className="mx-auto max-w-6xl">
+      <section id="origins" className="scroll-mt-28 px-4 sm:px-6 py-16">
+        <div className="mx-auto max-w-3xl text-center">
           <motion.h2
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="mb-12 text-center"
+            className="mb-4"
             style={{
-              fontSize: "clamp(2rem, 4vw, 3rem)",
+              fontSize: "clamp(1.75rem, 3.5vw, 2.5rem)",
               fontWeight: 700,
               color: "var(--primary)",
             }}
           >
             Origins of yoga &amp; Yoga Day in Scotland
           </motion.h2>
-          <OriginsSection />
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mb-8"
+            style={{
+              fontSize: "1.05rem",
+              lineHeight: 1.65,
+              color: "var(--muted-foreground)",
+            }}
+          >
+            From ancient roots to today&apos;s celebration — how yoga connects with
+            Scotland.
+          </motion.p>
+          <Link
+            href="/origins"
+            className="inline-flex items-center justify-center rounded-lg px-6 py-3 text-center font-semibold text-white transition-transform hover:scale-[1.02]"
+            style={{ backgroundColor: "var(--secondary)" }}
+          >
+            Read origins &amp; history
+          </Link>
         </div>
       </section>
 
       <section
         id="impact"
-        className="scroll-mt-28 px-6 py-24"
+        className="scroll-mt-28 px-4 sm:px-6 py-16"
         style={{ backgroundColor: "var(--muted)" }}
       >
-        <div className="mx-auto max-w-6xl">
+        <div className="mx-auto max-w-3xl text-center">
           <motion.h2
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="mb-4 text-center"
+            className="mb-4"
             style={{
-              fontSize: "clamp(2rem, 4vw, 3rem)",
+              fontSize: "clamp(1.75rem, 3.5vw, 2.5rem)",
               fontWeight: 700,
               color: "var(--primary)",
             }}
@@ -619,9 +618,9 @@ export function ScotlandSite() {
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="mx-auto mb-12 max-w-2xl text-center"
+            className="mb-8"
             style={{
-              fontSize: "1.1rem",
+              fontSize: "1.05rem",
               lineHeight: 1.65,
               color: "var(--muted-foreground)",
             }}
@@ -629,13 +628,19 @@ export function ScotlandSite() {
             Healthcare partnerships, schools, and community celebration — building
             something that lasts.
           </motion.p>
-          <ImpactSection />
+          <Link
+            href="/impact"
+            className="inline-flex items-center justify-center rounded-lg px-6 py-3 text-center font-semibold text-white transition-transform hover:scale-[1.02]"
+            style={{ backgroundColor: "var(--secondary)" }}
+          >
+            Read impact &amp; long-term plans
+          </Link>
         </div>
       </section>
 
       <footer
         id="involved"
-        className="scroll-mt-28 px-6 py-20"
+        className="scroll-mt-28 px-4 sm:px-6 py-20"
         style={{ backgroundColor: "var(--primary)" }}
       >
         <div className="mx-auto max-w-4xl text-center">

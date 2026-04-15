@@ -2,7 +2,8 @@
 
 import { useId, useState } from "react";
 
-const EVENTBRITE_URL = "https://www.eventbrite.co.uk";
+const EVENTBRITE_URL =
+  "https://www.eventbrite.co.uk/e/1987392705080?aff=oddtdtcreator";
 
 type TabId = "schedule" | "location" | "instructors";
 
@@ -53,7 +54,7 @@ export function TheEventTabs() {
           role="tabpanel"
           id={`${baseId}-panel-schedule`}
           aria-labelledby={`${baseId}-schedule`}
-          className="rounded-2xl border p-8 sm:p-10"
+          className="rounded-2xl border p-4 sm:p-8 md:p-10"
           style={{
             borderColor: "var(--border)",
             backgroundColor: "var(--background)",
@@ -110,7 +111,7 @@ export function TheEventTabs() {
           role="tabpanel"
           id={`${baseId}-panel-location`}
           aria-labelledby={`${baseId}-location`}
-          className="space-y-10 rounded-2xl border p-8 sm:p-10"
+          className="space-y-8 rounded-2xl border p-4 sm:space-y-10 sm:p-8 md:p-10"
           style={{
             borderColor: "var(--border)",
             backgroundColor: "var(--background)",
@@ -292,7 +293,7 @@ export function TheEventTabs() {
           role="tabpanel"
           id={`${baseId}-panel-instructors`}
           aria-labelledby={`${baseId}-instructors`}
-          className="rounded-2xl border p-8 sm:p-10"
+          className="rounded-2xl border p-4 sm:p-8 md:p-10"
           style={{
             borderColor: "var(--border)",
             backgroundColor: "var(--background)",

@@ -24,6 +24,9 @@
 .DS_Store
 *.pem
 
+# Large gallery originals (run `npm run gallery:optimize` to produce WebP in public/)
+/gallery-source
+
 # debug
 npm-debug.log*
 yarn-debug.log*

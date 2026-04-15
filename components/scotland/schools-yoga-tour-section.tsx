@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "motion/react";
 
 const contactMail = "mailto:info@yogadayshf.org?subject=Schools%20Yoga%20Tour";
@@ -153,7 +154,7 @@ export function SchoolsYogaTourSection() {
         transition={{ duration: 0.6, delay: 0.12 }}
       >
         <h3
-          className="mb-4"
+          className="mb-5"
           style={{
             fontSize: "1.45rem",
             fontWeight: 700,
@@ -162,62 +163,104 @@ export function SchoolsYogaTourSection() {
         >
           Partner with us
         </h3>
-        <h4
-          className="mb-2"
-          style={{ fontSize: "1.15rem", fontWeight: 600, color: "var(--foreground)" }}
-        >
-          The best of Glasgow
-        </h4>
-        <p
-          className="mb-6"
-          style={{
-            fontSize: "1.05rem",
-            lineHeight: 1.75,
-            color: "var(--muted-foreground)",
-          }}
-        >
-          We aren&apos;t just bringing yoga to your school; we are bringing
-          Glasgow&apos;s premier yoga talent. Our facilitators are highly vetted,
-          insurance-certified, and deeply experienced in working with children and
-          young people. They combine modern physiological expertise with the
-          spiritual depth of the practice.
-        </p>
-        <h4
-          className="mb-2"
-          style={{ fontSize: "1.15rem", fontWeight: 600, color: "var(--foreground)" }}
-        >
-          Cultural integrity
-        </h4>
-        <p
-          className="mb-6"
-          style={{
-            fontSize: "1.05rem",
-            lineHeight: 1.75,
-            color: "var(--muted-foreground)",
-          }}
-        >
-          By partnering with the Hindu community, your school is choosing an
-          authentic educational experience. We move beyond &ldquo;yoga as
-          exercise&rdquo; to honour the heritage, ethics, and philosophy that make
-          yoga a holistic path to wellbeing.
-        </p>
-        <h4
-          className="mb-2"
-          style={{ fontSize: "1.15rem", fontWeight: 600, color: "var(--foreground)" }}
-        >
-          Bring the tour to your school
-        </h4>
-        <p
-          style={{
-            fontSize: "1.05rem",
-            lineHeight: 1.75,
-            color: "var(--muted-foreground)",
-          }}
-        >
-          We handle the logistics; you provide the space. Organised in close
-          collaboration with school leadership, we ensure the content aligns with
-          your specific Health and Wellbeing (HWB) goals for the term.
-        </p>
+        <div className="grid gap-6 lg:grid-cols-[1.05fr_1fr] lg:items-start lg:gap-8">
+          <div className="space-y-4">
+            <div
+              className="overflow-hidden rounded-2xl border"
+              style={{ borderColor: "var(--border)", backgroundColor: "var(--muted)" }}
+            >
+              <Image
+                src="/images/sections/partner-with-us-dsc05530.png"
+                alt="Community partners standing together at a yoga day event"
+                width={2048}
+                height={1280}
+                className="h-full w-full object-cover"
+              />
+            </div>
+            <div
+              className="aspect-[16/9] overflow-hidden rounded-2xl border"
+              style={{ borderColor: "var(--border)", backgroundColor: "var(--muted)" }}
+            >
+              <Image
+                src="/images/sections/cultural-integrity-img20240622.png"
+                alt="Cultural programme at a Hindu community event in Glasgow"
+                width={2048}
+                height={910}
+                className="h-full w-full object-cover object-[42%_50%]"
+              />
+            </div>
+          </div>
+          <div>
+            <h4
+              className="mb-2"
+              style={{
+                fontSize: "1.15rem",
+                fontWeight: 600,
+                color: "var(--foreground)",
+              }}
+            >
+              The best of Glasgow
+            </h4>
+            <p
+              className="mb-6"
+              style={{
+                fontSize: "1.05rem",
+                lineHeight: 1.75,
+                color: "var(--muted-foreground)",
+              }}
+            >
+              We aren&apos;t just bringing yoga to your school; we are bringing
+              Glasgow&apos;s premier yoga talent. Our facilitators are highly vetted,
+              insurance-certified, and deeply experienced in working with children
+              and young people. They combine modern physiological expertise with the
+              spiritual depth of the practice.
+            </p>
+            <h4
+              className="mb-2"
+              style={{
+                fontSize: "1.15rem",
+                fontWeight: 600,
+                color: "var(--foreground)",
+              }}
+            >
+              Cultural integrity
+            </h4>
+            <p
+              className="mb-6"
+              style={{
+                fontSize: "1.05rem",
+                lineHeight: 1.75,
+                color: "var(--muted-foreground)",
+              }}
+            >
+              By partnering with the Hindu community, your school is choosing an
+              authentic educational experience. We move beyond &ldquo;yoga as
+              exercise&rdquo; to honour the heritage, ethics, and philosophy that
+              make yoga a holistic path to wellbeing.
+            </p>
+            <h4
+              className="mb-2"
+              style={{
+                fontSize: "1.15rem",
+                fontWeight: 600,
+                color: "var(--foreground)",
+              }}
+            >
+              Bring the tour to your school
+            </h4>
+            <p
+              style={{
+                fontSize: "1.05rem",
+                lineHeight: 1.75,
+                color: "var(--muted-foreground)",
+              }}
+            >
+              We handle the logistics; you provide the space. Organised in close
+              collaboration with school leadership, we ensure the content aligns
+              with your specific Health and Wellbeing (HWB) goals for the term.
+            </p>
+          </div>
+        </div>
       </motion.div>
 
       <motion.div
