@@ -9,6 +9,7 @@ import {
   Heart,
   Mountain,
   Sparkles,
+  SunMoon,
   Users,
   Video,
 } from "lucide-react";
@@ -85,23 +86,27 @@ export function ScotlandSite() {
     },
   ];
 
+  const themeToggleLabel =
+    theme === "traditional"
+      ? "Switch to modern theme"
+      : "Switch to traditional theme";
+
   return (
     <div className="min-h-screen overflow-x-hidden bg-background text-foreground">
       <motion.button
         type="button"
         onClick={toggleTheme}
-        className="fixed top-6 right-6 z-50 rounded-full px-4 py-3 text-sm shadow-lg transition-colors sm:px-6 sm:text-base"
-        style={{
-          backgroundColor: theme === "traditional" ? "#6b4c9a" : "#d97706",
-          color: "white",
-        }}
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
+        className="fixed top-3 right-3 z-50 flex h-11 w-11 items-center justify-center rounded-full border border-foreground/15 bg-background/95 text-foreground shadow-md backdrop-blur-md sm:top-4 sm:right-4 sm:h-12 sm:w-12"
+        aria-label={themeToggleLabel}
+        title={themeToggleLabel}
+        whileHover={{ scale: 1.06 }}
+        whileTap={{ scale: 0.94 }}
       >
-        Switch to {theme === "traditional" ? "Modern" : "Traditional"} Theme
+        <SunMoon className="h-5 w-5 sm:h-[1.35rem] sm:w-[1.35rem]" aria-hidden />
       </motion.button>
 
       <motion.nav
+        aria-label="Primary"
         className="fixed top-0 right-0 left-0 z-40 border-b backdrop-blur-md"
         style={{
           opacity: headerOpacity,
@@ -109,35 +114,39 @@ export function ScotlandSite() {
           backgroundColor: "rgba(255, 255, 255, 0.88)",
         }}
       >
-        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-4 py-3 sm:px-6">
-          <div className="flex min-w-0 items-center gap-2 sm:gap-3">
-            <Image
-              src={LOGO_SRC}
-              alt="Scotland's International Yoga Day"
-              width={666}
-              height={375}
-              className="h-10 w-auto sm:h-12"
-              priority
-            />
-          </div>
-          <div className="hidden max-h-[70vh] w-full flex-wrap items-center justify-end gap-x-4 gap-y-2 overflow-y-auto text-sm lg:flex xl:gap-x-6 xl:text-[0.9rem]">
-            {navItems.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                className="whitespace-nowrap transition-opacity hover:opacity-70"
-              >
-                {item.name}
-              </a>
-            ))}
+        <div className="mx-auto max-w-7xl px-4 py-1 pr-14 sm:px-6 sm:py-1 sm:pr-16 lg:pr-20">
+          <div className="flex flex-col gap-1.5 sm:gap-2 lg:flex-row lg:items-center lg:gap-4">
+            <div className="relative z-10 flex min-w-0 shrink-0 items-center">
+              <Image
+                src={LOGO_SRC}
+                alt="Scotland's International Yoga Day"
+                width={666}
+                height={375}
+                className="h-16 w-auto sm:h-20 lg:h-24"
+                priority
+              />
+            </div>
+            <div className="hidden min-h-0 min-w-0 flex-1 items-center justify-center lg:flex">
+              <div className="flex max-w-full flex-wrap items-center justify-center gap-x-3 gap-y-1 text-[0.8125rem] font-medium leading-tight tracking-wide text-foreground/85 sm:gap-x-4 sm:text-sm xl:gap-x-5 xl:text-[0.9375rem]">
+                {navItems.map((item) => (
+                  <a
+                    key={item.name}
+                    href={item.href}
+                    className="whitespace-nowrap rounded-sm px-0.5 transition-colors hover:text-foreground"
+                  >
+                    {item.name}
+                  </a>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
-        <div className="flex flex-wrap justify-center gap-x-3 gap-y-1 border-t px-3 py-2 text-xs sm:text-sm lg:hidden">
+        <div className="flex flex-wrap justify-center gap-x-2.5 gap-y-0.5 border-t border-foreground/10 px-3 py-1 text-[0.8125rem] font-medium leading-tight text-foreground/85 sm:gap-x-3 sm:text-sm lg:hidden">
           {navItems.map((item) => (
             <a
               key={item.name}
               href={item.href}
-              className="text-foreground/90 underline-offset-2 hover:underline"
+              className="underline-offset-2 transition-colors hover:text-foreground hover:underline"
             >
               {item.name}
             </a>
