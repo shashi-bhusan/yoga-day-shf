@@ -25,7 +25,7 @@ const navItems: readonly NavItem[] = [
   { name: "The Event", href: "#event" },
   { name: "Schools Tour", href: "/schools-tour" },
   { name: "Our Framework", href: "/framework" },
-  { name: "Highlights", href: "#gallery" },
+  { name: "Highlights", href: "#event-highlights" },
   { name: "Gallery", href: "/gallery" },
   { name: "Origins", href: "/origins" },
   {

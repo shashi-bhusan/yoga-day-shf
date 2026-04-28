@@ -20,7 +20,7 @@ export function TheEventTabs() {
   return (
     <div className="mx-auto max-w-4xl">
       <div
-        className="mb-8 flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center"
+        className="mb-5 flex flex-col gap-2 sm:mb-6 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center"
         role="tablist"
         aria-label="The event"
       >
@@ -54,14 +54,14 @@ export function TheEventTabs() {
           role="tabpanel"
           id={`${baseId}-panel-schedule`}
           aria-labelledby={`${baseId}-schedule`}
-          className="rounded-2xl border p-4 sm:p-8 md:p-10"
+          className="rounded-2xl border p-4 sm:p-6 md:p-8"
           style={{
             borderColor: "var(--border)",
             backgroundColor: "var(--background)",
           }}
         >
           <h3
-            className="mb-4"
+            className="mb-3"
             style={{
               fontSize: "1.5rem",
               fontWeight: 700,
@@ -71,7 +71,7 @@ export function TheEventTabs() {
             Event schedule
           </h3>
           <p
-            className="mb-6"
+            className="mb-4"
             style={{
               fontSize: "1.15rem",
               lineHeight: 1.75,

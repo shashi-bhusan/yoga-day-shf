@@ -1,52 +1,49 @@
 "use client";
 
+import type { ReactNode } from "react";
 import Image from "next/image";
 import { motion } from "motion/react";
 
 const contactMail = "mailto:info@yogadayshf.org?subject=Schools%20Yoga%20Tour";
 
+function SectionTitle({
+  children,
+  centered = false,
+}: {
+  children: ReactNode;
+  centered?: boolean;
+}) {
+  return (
+    <h3
+      className={`mb-5 flex items-center gap-3 text-balance sm:mb-6 ${centered ? "justify-center" : ""}`}
+      style={{
+        fontSize: "clamp(1.35rem, 2.5vw, 1.6rem)",
+        fontWeight: 700,
+        color: "var(--primary)",
+      }}
+    >
+      <span
+        className="h-8 w-1 shrink-0 rounded-full sm:h-9"
+        style={{ backgroundColor: "var(--primary)" }}
+        aria-hidden
+      />
+      {children}
+    </h3>
+  );
+}
+
 export function SchoolsYogaTourSection() {
   return (
-    <div className="mx-auto max-w-3xl space-y-12">
-      <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-      >
-        <p
-          style={{
-            fontSize: "1.1rem",
-            lineHeight: 1.8,
-            color: "var(--muted-foreground)",
-          }}
-        >
-          In honour of the International Day of Yoga (21 June), our team organises
-          a workshop tour to support the mental health and wellbeing of
-          Scotland&apos;s students. This isn&apos;t just about physical exercise;
-          it is a journey into mindfulness, resilience, and teamwork, rooted in a
-          living tradition that spans over 5,000 years.
-        </p>
-      </motion.div>
-
+    <div className="space-y-10 sm:space-y-14">
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6, delay: 0.05 }}
       >
-        <h3
-          className="mb-4"
-          style={{
-            fontSize: "1.45rem",
-            fontWeight: 700,
-            color: "var(--primary)",
-          }}
-        >
-          Benefits for students
-        </h3>
+        <SectionTitle>Benefits for students</SectionTitle>
         <p
-          className="mb-4"
+          className="mb-6 max-w-3xl text-pretty sm:mb-8"
           style={{
             fontSize: "1.05rem",
             lineHeight: 1.75,
@@ -57,37 +54,51 @@ export function SchoolsYogaTourSection() {
           are designed to provide immediate wins for students&apos; mental and
           physical health:
         </p>
-        <ul
-          className="list-disc space-y-3 pl-5"
-          style={{
-            fontSize: "1.05rem",
-            lineHeight: 1.7,
-            color: "var(--muted-foreground)",
-          }}
-        >
-          <li>
-            <strong className="text-foreground">Instant stress decompression:</strong>{" "}
-            Simple pranayama (breathwork) techniques to lower cortisol and manage
-            exam-season anxiety.
-          </li>
-          <li>
-            <strong className="text-foreground">Sharpened cognitive focus:</strong>{" "}
-            Movement sequences that reset the brain, improving concentration and
-            information retention.
-          </li>
-          <li>
-            <strong className="text-foreground">Emotional resilience:</strong>{" "}
-            Teaching the pause — helping students respond to challenges with calm
-            rather than impulse.
-          </li>
-          <li>
-            <strong className="text-foreground">Physical vitality:</strong>{" "}
-            Improving posture and mobility (ideal for counteracting desk slouch).
-          </li>
-          <li>
-            <strong className="text-foreground">Social connection:</strong>{" "}
-            Team-building exercises that foster empathy, trust, and community.
-          </li>
+        <ul className="grid gap-3 sm:grid-cols-2 sm:gap-4">
+          {[
+            {
+              title: "Instant stress decompression",
+              body: "Simple pranayama (breathwork) techniques to lower cortisol and manage exam-season anxiety.",
+            },
+            {
+              title: "Sharpened cognitive focus",
+              body: "Movement sequences that reset the brain, improving concentration and information retention.",
+            },
+            {
+              title: "Emotional resilience",
+              body: "Teaching the pause — helping students respond to challenges with calm rather than impulse.",
+            },
+            {
+              title: "Physical vitality",
+              body: "Improving posture and mobility (ideal for counteracting desk slouch).",
+            },
+            {
+              title: "Social connection",
+              body: "Team-building exercises that foster empathy, trust, and community.",
+            },
+          ].map((item) => (
+            <li
+              key={item.title}
+              className="rounded-2xl border border-border bg-muted/45 p-4 sm:p-5"
+            >
+              <p
+                className="mb-1.5 font-semibold text-foreground"
+                style={{ fontSize: "1.02rem" }}
+              >
+                {item.title}
+              </p>
+              <p
+                className="text-pretty leading-relaxed"
+                style={{
+                  fontSize: "0.98rem",
+                  lineHeight: 1.65,
+                  color: "var(--muted-foreground)",
+                }}
+              >
+                {item.body}
+              </p>
+            </li>
+          ))}
         </ul>
       </motion.div>
 
@@ -97,16 +108,7 @@ export function SchoolsYogaTourSection() {
         viewport={{ once: true }}
         transition={{ duration: 0.6, delay: 0.1 }}
       >
-        <h3
-          className="mb-4"
-          style={{
-            fontSize: "1.45rem",
-            fontWeight: 700,
-            color: "var(--primary)",
-          }}
-        >
-          How the workshop works
-        </h3>
+        <SectionTitle>How the workshop works</SectionTitle>
         <p
           className="mb-4"
           style={{
@@ -153,16 +155,7 @@ export function SchoolsYogaTourSection() {
         viewport={{ once: true }}
         transition={{ duration: 0.6, delay: 0.12 }}
       >
-        <h3
-          className="mb-5"
-          style={{
-            fontSize: "1.45rem",
-            fontWeight: 700,
-            color: "var(--primary)",
-          }}
-        >
-          Partner with us
-        </h3>
+        <SectionTitle>Partner with us</SectionTitle>
         <div className="grid gap-6 lg:grid-cols-[1.05fr_1fr] lg:items-start lg:gap-8">
           <div className="space-y-4">
             <div
@@ -271,16 +264,7 @@ export function SchoolsYogaTourSection() {
         className="rounded-2xl border p-8 text-center"
         style={{ borderColor: "var(--border)", backgroundColor: "var(--muted)" }}
       >
-        <h3
-          className="mb-3"
-          style={{
-            fontSize: "1.35rem",
-            fontWeight: 700,
-            color: "var(--primary)",
-          }}
-        >
-          Contact us
-        </h3>
+        <SectionTitle centered>Contact us</SectionTitle>
         <p
           className="mb-4"
           style={{

@@ -3,9 +3,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "motion/react";
-import { BookOpen, Globe, Mountain, Users, Video } from "lucide-react";
+import { BookOpen } from "lucide-react";
 import { ImageWithFallback } from "@/components/scotland/image-with-fallback";
 import { ScotlandSiteHeader } from "@/components/scotland/scotland-site-header";
+import { EventHighlightsSection } from "@/components/scotland/event-highlights-section";
 import { TheEventTabs } from "@/components/scotland/the-event-tabs";
 const LOGO_SRC = "/images/logos/scotland-yoga-day-logo.png";
 const EVENTBRITE_URL =
@@ -18,31 +19,6 @@ const YEARBOOK_2024_URL = "https://online.fliphtml5.com/msyzm/jspc/";
 const EVENT_SECTION_IMAGE_SRC = "/images/event/eventbrite-2026.png";
 
 export function ScotlandSite() {
-  const events = [
-    {
-      icon: Mountain,
-      title: "The Great Scottish Sun Salutation",
-      description: "A massive, synchronized flow at the foot of Stirling Castle.",
-    },
-    {
-      icon: Globe,
-      title: "The Wellness Symposium",
-      description:
-        "A professional forum featuring experts on mindfulness, ergonomics, and mental health.",
-    },
-    {
-      icon: Users,
-      title: "Forest Bathing & Flow",
-      description: "Immersive experiences in the Cairngorms and Trossachs.",
-    },
-    {
-      icon: Video,
-      title: "Digital Sanctuary",
-      description:
-        "A high-end virtual stream for those joining from remote areas or the office.",
-    },
-  ];
-
   return (
     <div className="min-h-screen overflow-x-hidden bg-background text-foreground">
       <ScotlandSiteHeader />
@@ -147,24 +123,76 @@ export function ScotlandSite() {
         </div>
       </section>
 
-      <section id="event" className="scroll-mt-28 px-4 sm:px-6 py-24">
+      <section
+        id="event"
+        className="scroll-mt-28 px-4 pt-24 pb-8 sm:px-6 sm:pb-10"
+      >
         <div className="mx-auto max-w-6xl">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="mb-12"
+            className="mb-8 sm:mb-10"
           >
-            <h2
-              className="mb-8 text-center lg:mb-10"
-              style={{
-                fontSize: "clamp(2rem, 4vw, 3.5rem)",
-                fontWeight: 700,
-                color: "var(--primary)",
-              }}
-            >
-              The event
+            <h2 className="mb-8 text-center lg:mb-10">
+              <span className="sr-only">The Event</span>
+              <span
+                aria-hidden
+                className="relative inline-flex flex-wrap items-baseline justify-center gap-x-1 sm:gap-x-1.5"
+                style={{
+                  fontSize: "clamp(2.25rem, 5.5vw, 4rem)",
+                  lineHeight: 1.05,
+                }}
+              >
+                <span
+                  className="font-semibold lowercase"
+                  style={{
+                    color: "var(--muted-foreground)",
+                    fontSize: "0.42em",
+                    letterSpacing: "-0.02em",
+                  }}
+                >
+                  the
+                </span>
+                <span
+                  className="font-extrabold tracking-tight"
+                  style={{
+                    backgroundImage:
+                      "linear-gradient(118deg, var(--primary) 0%, #c2410c 52%, #ea580c 100%)",
+                    WebkitBackgroundClip: "text",
+                    backgroundClip: "text",
+                    color: "transparent",
+                  }}
+                >
+                  Event
+                </span>
+              </span>
+              <span
+                aria-hidden
+                className="mx-auto mt-4 flex w-full max-w-xs flex-col items-center justify-center gap-2 sm:max-w-none sm:flex-row sm:gap-3"
+              >
+                <span
+                  className="h-1 w-14 rounded-full sm:w-20"
+                  style={{
+                    background:
+                      "linear-gradient(90deg, transparent, var(--primary), transparent)",
+                  }}
+                />
+                <span
+                  className="text-center text-xs font-semibold uppercase tracking-[0.22em] sm:text-sm"
+                  style={{ color: "var(--muted-foreground)" }}
+                >
+                  20 June · Glasgow & nationwide
+                </span>
+                <span
+                  className="hidden h-1 w-14 rounded-full sm:block sm:w-20"
+                  style={{
+                    background:
+                      "linear-gradient(90deg, transparent, var(--primary), transparent)",
+                  }}
+                />
+              </span>
             </h2>
             <div className="mx-auto grid max-w-5xl items-center gap-8 text-center lg:grid-cols-12 lg:gap-10 lg:text-left">
               <div className="space-y-6 lg:col-span-6">
@@ -226,75 +254,20 @@ export function ScotlandSite() {
         </div>
       </section>
 
+      <EventHighlightsSection />
+
       <section
         id="gallery"
         className="scroll-mt-28 px-4 sm:px-6 py-24"
         style={{ backgroundColor: "var(--muted)" }}
       >
         <div className="mx-auto max-w-7xl">
-          <motion.h2
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="mb-16 text-center"
-            style={{
-              fontSize: "clamp(2rem, 4vw, 3rem)",
-              fontWeight: 700,
-              color: "var(--primary)",
-            }}
-          >
-            Event highlights
-          </motion.h2>
-          <div className="grid gap-8 md:grid-cols-2">
-            {events.map((event, index) => (
-              <motion.div
-                key={event.title}
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                whileHover={{ scale: 1.03 }}
-                className="rounded-2xl p-8"
-                style={{ backgroundColor: "var(--background)" }}
-              >
-                <div
-                  className="mb-6 flex h-16 w-16 items-center justify-center rounded-full"
-                  style={{ backgroundColor: "var(--accent)" }}
-                >
-                  <event.icon
-                    size={28}
-                    style={{ color: "var(--accent-foreground)" }}
-                  />
-                </div>
-                <h3
-                  className="mb-4"
-                  style={{
-                    fontSize: "1.5rem",
-                    fontWeight: 600,
-                    color: "var(--foreground)",
-                  }}
-                >
-                  {event.title}
-                </h3>
-                <p
-                  style={{
-                    fontSize: "1.05rem",
-                    lineHeight: 1.7,
-                    color: "var(--muted-foreground)",
-                  }}
-                >
-                  {event.description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.15 }}
-            className="mx-auto mt-20 max-w-5xl"
+            className="mx-auto max-w-5xl"
           >
             <h3
               className="mb-4 text-center"

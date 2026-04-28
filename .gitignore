@@ -26,6 +26,7 @@
 
 # Large gallery originals (run `npm run gallery:optimize` to produce WebP in public/)
 /gallery-source
+/event-highlights-source
 
 # debug
 npm-debug.log*

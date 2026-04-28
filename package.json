@@ -8,7 +8,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "gallery:optimize": "node scripts/optimize-gallery.mjs"
+    "gallery:optimize": "node scripts/optimize-gallery.mjs",
+    "event-highlights:optimize": "node scripts/optimize-event-highlights.mjs"
   },
   "dependencies": {
     "lucide-react": "^1.8.0",

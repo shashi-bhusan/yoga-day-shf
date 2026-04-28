@@ -43,7 +43,17 @@ function columnCountForWidth(containerWidth: number) {
   return 3;
 }
 
-export function GalleryMasonry({ items }: { items: GalleryItem[] }) {
+export function GalleryMasonry({
+  items,
+  photoAltPrefix = "Gallery photo",
+  imageQuality = 75,
+}: {
+  items: GalleryItem[];
+  /** Shown before column/row index in each image `alt` (accessibility). */
+  photoAltPrefix?: string;
+  /** Next/Image quality 1–100; higher for hero-style grids (default 75). */
+  imageQuality?: number;
+}) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [layout, setLayout] = useState({ width: 0, cols: 3 });
 
@@ -132,12 +142,13 @@ export function GalleryMasonry({ items }: { items: GalleryItem[] }) {
               >
                 <Image
                   src={it.url}
-                  alt={`Gallery photo ${ci + 1}-${ii + 1}`}
+                  alt={`${photoAltPrefix} ${ci + 1}-${ii + 1}`}
                   width={it.width}
                   height={it.height}
                   className="h-auto w-full bg-muted object-cover align-middle"
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   style={{ width: "100%", height: "auto" }}
+                  quality={imageQuality}
                 />
               </figure>
             ))}
