@@ -8,8 +8,8 @@ export function CorporatePageClient() {
   return (
     <>
       <ScotlandSiteHeader linkHashesToHome />
-      <main className="min-h-screen min-w-0 overflow-x-hidden bg-background pt-24 text-foreground">
-        <section className="scroll-mt-28 px-4 py-16 sm:px-6 sm:py-24">
+      <main className="min-h-screen min-w-0 overflow-x-hidden bg-background pt-28 text-foreground sm:pt-32">
+        <section className="scroll-mt-32 px-4 py-16 sm:px-6 sm:py-24">
           <div className="mx-auto max-w-6xl">
             <CorporateSection />
             <p

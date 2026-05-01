@@ -4,7 +4,7 @@ import { CorporatePageClient } from "@/components/scotland/corporate-page-client
 export const metadata: Metadata = {
   title: "Corporate & partnerships | Scotland's International Yoga Day",
   description:
-    "Align with wellbeing — CSR, brand visibility, and partnership opportunities with Scotland's International Yoga Day.",
+    "Partner with Scotland's International Yoga Day 2026 — sponsorship, workshops, exhibitor stalls, and CSR alignment with the Scottish Hindu Foundation.",
 };
 
 export default function CorporatePage() {
