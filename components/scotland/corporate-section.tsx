@@ -45,26 +45,62 @@ export function CorporateSection() {
   const [organisation, setOrganisation] = useState("");
   const [interest, setInterest] = useState("");
   const [message, setMessage] = useState("");
+  const [website, setWebsite] = useState("");
+  const [startedAt] = useState(() => Date.now());
+  const [isSending, setIsSending] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [submitOk, setSubmitOk] = useState(false);
 
   const handleSubmit = useCallback(
-    (e: FormEvent) => {
+    async (e: FormEvent) => {
       e.preventDefault();
-      const subject = encodeURIComponent(
-        "Corporate partnership — Scotland's International Yoga Day 2026",
-      );
-      const lines = [
-        `Name: ${name}`,
-        `Contact: ${contact}`,
-        `Organisation / business: ${organisation}`,
-        `Stall / sponsor / partner interest: ${interest || "(not selected)"}`,
-        "",
-        "Tell us about yourself:",
-        message,
-      ];
-      const body = encodeURIComponent(lines.join("\n"));
-      window.location.href = `mailto:${CORPORATE_MAIL}?subject=${subject}&body=${body}`;
+      setSubmitError(null);
+      setSubmitOk(false);
+      setIsSending(true);
+
+      try {
+        const res = await fetch("/api/corporate-inquiry", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({
+            name,
+            contact,
+            organisation,
+            interest,
+            message,
+            website,
+            startedAt,
+          }),
+        });
+
+        const data = (await res.json().catch(() => null)) as
+          | { ok: true }
+          | { ok: false; error?: string }
+          | null;
+
+        if (!res.ok || !data || !("ok" in data) || data.ok !== true) {
+          const errorMessage =
+            data && "error" in data && data.error
+              ? data.error
+              : "We couldn’t send your enquiry. Please try again.";
+          setSubmitError(errorMessage);
+          return;
+        }
+
+        setSubmitOk(true);
+        setName("");
+        setContact("");
+        setOrganisation("");
+        setInterest("");
+        setMessage("");
+        setWebsite("");
+      } catch {
+        setSubmitError("We couldn’t send your enquiry. Please try again.");
+      } finally {
+        setIsSending(false);
+      }
     },
-    [name, contact, organisation, interest, message],
+    [name, contact, organisation, interest, message, website, startedAt],
   );
 
   return (
@@ -378,6 +414,18 @@ export function CorporateSection() {
             className="mx-auto max-w-xl space-y-4"
             style={{ color: "var(--foreground)" }}
           >
+            <div className="sr-only" aria-hidden="true">
+              <label htmlFor="corp-website">Website</label>
+              <input
+                id="corp-website"
+                name="website"
+                type="text"
+                tabIndex={-1}
+                autoComplete="off"
+                value={website}
+                onChange={(ev) => setWebsite(ev.target.value)}
+              />
+            </div>
             <div>
               <label htmlFor="corp-name" className="mb-1.5 block text-sm font-medium">
                 Name
@@ -389,6 +437,7 @@ export function CorporateSection() {
                 autoComplete="name"
                 value={name}
                 onChange={(ev) => setName(ev.target.value)}
+                required
                 className="w-full rounded-lg border border-border bg-background px-4 py-3 text-foreground outline-none ring-primary/30 focus-visible:ring-2"
                 placeholder="Your name"
               />
@@ -404,6 +453,7 @@ export function CorporateSection() {
                 autoComplete="email"
                 value={contact}
                 onChange={(ev) => setContact(ev.target.value)}
+                required
                 className="w-full rounded-lg border border-border bg-background px-4 py-3 text-foreground outline-none ring-primary/30 focus-visible:ring-2"
                 placeholder="Email or phone"
               />
@@ -419,6 +469,7 @@ export function CorporateSection() {
                 autoComplete="organization"
                 value={organisation}
                 onChange={(ev) => setOrganisation(ev.target.value)}
+                required
                 className="w-full rounded-lg border border-border bg-background px-4 py-3 text-foreground outline-none ring-primary/30 focus-visible:ring-2"
                 placeholder="Company or organisation name"
               />
@@ -451,24 +502,37 @@ export function CorporateSection() {
                 rows={5}
                 value={message}
                 onChange={(ev) => setMessage(ev.target.value)}
+                required
                 className="w-full resize-y rounded-lg border border-border bg-background px-4 py-3 text-foreground outline-none ring-primary/30 focus-visible:ring-2"
                 placeholder="Your goals, questions, or how you’d like to collaborate…"
               />
             </div>
-            <p className="text-center text-xs" style={{ color: "var(--muted-foreground)" }}>
-              Submitting opens your email app with this message addressed to{" "}
-              <span className="font-medium text-foreground/90">{CORPORATE_MAIL}</span>.
-            </p>
+            {submitOk ? (
+              <p className="text-center text-sm font-medium" style={{ color: "var(--primary)" }}>
+                Thanks — your enquiry has been sent. We’ll reply to your contact details soon.
+              </p>
+            ) : null}
+            {submitError ? (
+              <p className="text-center text-sm font-medium" style={{ color: "var(--destructive)" }}>
+                {submitError}
+              </p>
+            ) : (
+              <p className="text-center text-xs" style={{ color: "var(--muted-foreground)" }}>
+                Submitting sends your enquiry to{" "}
+                <span className="font-medium text-foreground/90">{CORPORATE_MAIL}</span>.
+              </p>
+            )}
             <div className="pt-2 text-center">
               <button
                 type="submit"
+                disabled={isSending}
                 className="inline-block rounded-lg px-10 py-3.5 font-semibold text-white transition-transform hover:scale-[1.02] sm:py-4"
                 style={{
                   backgroundColor: "var(--secondary)",
                   fontSize: "1.05rem",
                 }}
               >
-                Send enquiry
+                {isSending ? "Sending…" : "Send enquiry"}
               </button>
             </div>
           </form>
