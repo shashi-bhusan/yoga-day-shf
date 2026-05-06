@@ -46,7 +46,6 @@ export function CorporateSection() {
   const [interest, setInterest] = useState("");
   const [message, setMessage] = useState("");
   const [website, setWebsite] = useState("");
-  const [startedAt] = useState(() => Date.now());
   const [isSending, setIsSending] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [submitOk, setSubmitOk] = useState(false);
@@ -69,7 +68,6 @@ export function CorporateSection() {
             interest,
             message,
             website,
-            startedAt,
           }),
         });
 
@@ -100,7 +98,7 @@ export function CorporateSection() {
         setIsSending(false);
       }
     },
-    [name, contact, organisation, interest, message, website, startedAt],
+    [name, contact, organisation, interest, message, website],
   );
 
   return (

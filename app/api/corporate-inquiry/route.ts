@@ -7,7 +7,6 @@ type CorporateInquiryPayload = {
   interest: string;
   message: string;
   website?: string;
-  startedAt?: number;
 };
 
 function getEnv(name: string) {
@@ -23,6 +22,14 @@ function normalizeText(value: unknown) {
 
 function looksLikeEmail(value: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+}
+
+function formatResendError(error: unknown): string {
+  if (error && typeof error === "object" && "message" in error) {
+    const msg = (error as { message?: unknown }).message;
+    if (typeof msg === "string" && msg.trim()) return msg;
+  }
+  return "Email could not be sent. Please try again later.";
 }
 
 function buildTextEmail(payload: CorporateInquiryPayload) {
@@ -51,14 +58,10 @@ export async function POST(req: Request) {
       interest: normalizeText(data.interest),
       message: normalizeText(data.message),
       website: normalizeText(data.website),
-      startedAt: typeof data.startedAt === "number" ? data.startedAt : undefined,
     };
 
-    // Basic bot checks: honeypot + minimum time on form.
+    // Honeypot only (bots often fill hidden fields). Do not fake success for real users.
     if (payload.website) {
-      return Response.json({ ok: true }, { status: 200 });
-    }
-    if (payload.startedAt && Date.now() - payload.startedAt < 1500) {
       return Response.json({ ok: true }, { status: 200 });
     }
 
@@ -75,7 +78,7 @@ export async function POST(req: Request) {
 
     const replyTo = looksLikeEmail(payload.contact) ? payload.contact : undefined;
 
-    await resend.emails.send({
+    const { error } = await resend.emails.send({
       from,
       to,
       subject: "Corporate enquiry — Scotland's International Yoga Day",
@@ -83,9 +86,18 @@ export async function POST(req: Request) {
       replyTo,
     });
 
+    if (error) {
+      console.error("[corporate-inquiry] Resend error:", error);
+      return Response.json(
+        { ok: false, error: formatResendError(error) },
+        { status: 502 },
+      );
+    }
+
     return Response.json({ ok: true }, { status: 200 });
   } catch (err) {
     const message = err instanceof Error ? err.message : "Unknown error";
+    console.error("[corporate-inquiry]", err);
     return Response.json({ ok: false, error: message }, { status: 500 });
   }
 }
