@@ -4,7 +4,8 @@ import type { ReactNode } from "react";
 import Image from "next/image";
 import { motion } from "motion/react";
 
-const contactMail = "mailto:info@yogadayshf.org?subject=Schools%20Yoga%20Tour";
+const contactMail =
+  "mailto:info@scotlandyogaday.co.uk?subject=Schools%20Yoga%20Tour";
 
 function SectionTitle({
   children,

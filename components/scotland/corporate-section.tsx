@@ -4,7 +4,7 @@ import Link from "next/link";
 import { motion } from "motion/react";
 import { useCallback, useState, type FormEvent } from "react";
 
-const CORPORATE_MAIL = "info@yogadayshf.org";
+const CORPORATE_MAIL = "info@scotlandyogaday.co.uk";
 
 const involvementRows = [
   {
