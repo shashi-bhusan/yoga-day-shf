@@ -8,6 +8,7 @@ import { ImageWithFallback } from "@/components/scotland/image-with-fallback";
 import { ScotlandSiteHeader } from "@/components/scotland/scotland-site-header";
 import { EventHighlightsSection } from "@/components/scotland/event-highlights-section";
 import { TheEventTabs } from "@/components/scotland/the-event-tabs";
+import { ProgrammeOrderScroller } from "@/components/scotland/programme-order-scroller";
 const LOGO_SRC = "/images/logos/scotland-yoga-day-logo.png";
 const EVENTBRITE_URL =
   "https://www.eventbrite.co.uk/e/1987392705080?aff=oddtdtcreator";
@@ -251,6 +252,46 @@ export function ScotlandSite() {
             </div>
           </motion.div>
           <TheEventTabs />
+
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="mt-16 sm:mt-20"
+          >
+            <div className="mx-auto max-w-4xl text-center">
+              <h3
+                className="mb-3 text-balance"
+                style={{
+                  fontSize: "clamp(1.5rem, 3vw, 1.85rem)",
+                  fontWeight: 700,
+                  color: "var(--primary)",
+                }}
+              >
+                A programme order
+              </h3>
+              <p
+                className="mx-auto mb-2 max-w-2xl text-pretty"
+                style={{
+                  fontSize: "1.05rem",
+                  lineHeight: 1.75,
+                  color: "var(--muted-foreground)",
+                }}
+              >
+                We&apos;re excited to share a first look at how the day will
+                unfold as we come together to celebrate movement, mindfulness,
+                and community.
+              </p>
+              <p
+                className="mx-auto mb-8 text-sm italic sm:mb-10"
+                style={{ color: "var(--muted-foreground)" }}
+              >
+                (subject to final confirmation)
+              </p>
+            </div>
+            <ProgrammeOrderScroller />
+          </motion.div>
         </div>
       </section>
 
