@@ -3,7 +3,7 @@
 import { useId, useState } from "react";
 
 const EVENTBRITE_URL =
-  "https://www.eventbrite.co.uk/e/1987392705080?aff=oddtdtcreator";
+  "https://www.eventbrite.co.uk/e/scotlands-international-yoga-day-26-tickets-1987862869354";
 
 type TabId = "schedule" | "location" | "instructors";
 

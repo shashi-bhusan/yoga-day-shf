@@ -11,7 +11,7 @@ import { TheEventTabs } from "@/components/scotland/the-event-tabs";
 import { ProgrammeOrderScroller } from "@/components/scotland/programme-order-scroller";
 const LOGO_SRC = "/images/logos/scotland-yoga-day-logo.png";
 const EVENTBRITE_URL =
-  "https://www.eventbrite.co.uk/e/1987392705080?aff=oddtdtcreator";
+  "https://www.eventbrite.co.uk/e/scotlands-international-yoga-day-26-tickets-1987862869354";
 const YEARBOOK_2025_URL =
   "https://online.fliphtml5.com/msyzm/ugee/index.html";
 const YEARBOOK_2024_URL = "https://online.fliphtml5.com/msyzm/jspc/";

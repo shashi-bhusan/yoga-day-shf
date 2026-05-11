@@ -11,7 +11,7 @@ const LOGO_SRC = "/images/logos/scotland-yoga-day-logo.png";
 const FACEBOOK_PAGE_URL =
   "https://www.facebook.com/profile.php?id=61575746207837";
 const EVENTBRITE_URL =
-  "https://www.eventbrite.co.uk/e/1987392705080?aff=oddtdtcreator";
+  "https://www.eventbrite.co.uk/e/scotlands-international-yoga-day-26-tickets-1987862869354";
 const INSTAGRAM_URL =
   "https://www.instagram.com/scotyogaday?igsh=ZXJ3eHliNnM5Njhq";
 
