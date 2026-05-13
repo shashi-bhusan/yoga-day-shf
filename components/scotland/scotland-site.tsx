@@ -9,6 +9,7 @@ import { ScotlandSiteHeader } from "@/components/scotland/scotland-site-header";
 import { EventHighlightsSection } from "@/components/scotland/event-highlights-section";
 import { TheEventTabs } from "@/components/scotland/the-event-tabs";
 import { ProgrammeOrderScroller } from "@/components/scotland/programme-order-scroller";
+import { YogaDayChallengeSection } from "@/components/scotland/yoga-day-challenge-section";
 const LOGO_SRC = "/images/logos/scotland-yoga-day-logo.png";
 const EVENTBRITE_URL =
   "https://www.eventbrite.co.uk/e/scotlands-international-yoga-day-26-tickets-1987862869354";
@@ -16,8 +17,8 @@ const YEARBOOK_2025_URL =
   "https://online.fliphtml5.com/msyzm/ugee/index.html";
 const YEARBOOK_2024_URL = "https://online.fliphtml5.com/msyzm/jspc/";
 
-/** Event section hero: `public/images/event/eventbrite-2026.png` (from 2026/Eventbrite.png; see documents/README.txt). */
-const EVENT_SECTION_IMAGE_SRC = "/images/event/eventbrite-2026.png";
+/** Event section hero: `public/images/event/event-hero-yoga-main-2026.jpg` (source: scotland-yoga-day/2026/Yoga main.jpeg). */
+const EVENT_SECTION_IMAGE_SRC = "/images/event/event-hero-yoga-main-2026.jpg";
 
 export function ScotlandSite() {
   return (
@@ -234,9 +235,9 @@ export function ScotlandSite() {
                   {/* Portrait poster: card shrink-wraps image (no side gutters); height cap keeps overlays visible */}
                   <Image
                     src={EVENT_SECTION_IMAGE_SRC}
-                    width={1200}
-                    height={2100}
-                    alt="Scotland's International Yoga Day — official Eventbrite listing and June celebration across Scotland."
+                    width={1131}
+                    height={1600}
+                    alt="Scotland's International Yoga Day 2026 — event poster at The Pyramid, Glasgow, and nationwide celebration."
                     className="h-auto max-h-[min(92vh,1180px)] w-auto max-w-full object-contain"
                     sizes="(max-width: 1024px) 100vw, min(560px, 45vw)"
                   />
@@ -294,6 +295,8 @@ export function ScotlandSite() {
           </motion.div>
         </div>
       </section>
+
+      <YogaDayChallengeSection />
 
       <EventHighlightsSection />
 
