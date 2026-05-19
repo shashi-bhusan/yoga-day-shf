@@ -9,7 +9,8 @@
     "start": "next start",
     "lint": "eslint",
     "gallery:optimize": "node scripts/optimize-gallery.mjs",
-    "event-highlights:optimize": "node scripts/optimize-event-highlights.mjs"
+    "event-highlights:optimize": "node scripts/optimize-event-highlights.mjs",
+    "instructors:sync": "node scripts/sync-instructor-images.cjs"
   },
   "dependencies": {
     "lucide-react": "^1.8.0",

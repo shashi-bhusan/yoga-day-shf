@@ -1,6 +1,8 @@
 "use client";
 
 import { useId, useState } from "react";
+import { FeaturedInstructorsCarousel } from "@/components/scotland/featured-instructors-carousel";
+import { instructorImages } from "@/lib/instructor-images";
 
 const EVENTBRITE_URL =
   "https://www.eventbrite.co.uk/e/scotlands-international-yoga-day-26-tickets-1987862869354";
@@ -16,6 +18,7 @@ const tabs: { id: TabId; label: string }[] = [
 export function TheEventTabs() {
   const baseId = useId();
   const [open, setOpen] = useState<TabId>("schedule");
+  const instructorSlides = instructorImages();
 
   return (
     <div className="mx-auto max-w-4xl">
@@ -310,16 +313,28 @@ export function TheEventTabs() {
             Featured instructors
           </h3>
           <p
+            className={instructorSlides.length ? "mb-0" : undefined}
             style={{
               fontSize: "1.1rem",
               lineHeight: 1.75,
               color: "var(--muted-foreground)",
             }}
           >
-            Our teaching team and featured instructors will be announced alongside
-            the full event schedule. Check back soon, or register your interest
-            below to hear first.
+            {instructorSlides.length ? (
+              <>
+                Meet some of the teachers and facilitators joining us for
+                Scotland&apos;s International Yoga Day 2026. More names will be
+                added as the programme is confirmed.
+              </>
+            ) : (
+              <>
+                Our teaching team and featured instructors will be announced
+                alongside the full event schedule. Check back soon, or register
+                your interest below to hear first.
+              </>
+            )}
           </p>
+          <FeaturedInstructorsCarousel slides={instructorSlides} />
         </div>
       )}
     </div>
