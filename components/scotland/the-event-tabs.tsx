@@ -313,43 +313,10 @@ export function TheEventTabs() {
             Featured instructors
           </h3>
           {instructorSlides.length ? (
-            <div
-              className="mb-2 max-w-3xl space-y-4 text-pretty"
-              style={{
-                fontSize: "1.05rem",
-                lineHeight: 1.75,
-                color: "var(--muted-foreground)",
-              }}
-            >
-              <p
-                className="font-semibold"
-                style={{ fontSize: "1.15rem", color: "var(--foreground)" }}
-              >
-                Namaste:
-              </p>
-              <p>
-                A certified yoga teacher and personal trainer with a passion for
-                movement, anatomy, and holistic wellbeing. With experience leading
-                HIIT, LBT, Spinning, Pilates, and yoga classes, Dima brings a dynamic
-                yet mindful approach to every session.
-              </p>
-              <p>
-                Deeply fascinated by the human body and the connection between
-                movement, breath, and internal awareness, Dima&apos;s teaching focuses
-                on helping people move better, feel stronger, and develop a deeper
-                understanding of themselves. Influenced by previous experience in
-                Pranic Healing, her practice blends physical training with mindful
-                awareness, creating classes that are both energising and restorative.
-              </p>
-              <p>
-                At SIYD 26, Dima will be leading an uplifting Power Yoga session
-                designed to build strength, mobility, and body awareness through
-                breath-led movement. Expect an energising flow that challenges the
-                body while encouraging focus, balance, and connection suitable for
-                both experienced yogis and those looking to explore a more dynamic
-                style of yoga.
-              </p>
-            </div>
+            <FeaturedInstructorsCarousel
+              slides={instructorSlides}
+              layout="split"
+            />
           ) : (
             <p
               style={{
@@ -363,7 +330,6 @@ export function TheEventTabs() {
               interest below to hear first.
             </p>
           )}
-          <FeaturedInstructorsCarousel slides={instructorSlides} />
         </div>
       )}
     </div>

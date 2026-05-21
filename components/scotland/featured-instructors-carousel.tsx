@@ -6,9 +6,243 @@ import type { InstructorImage } from "@/lib/instructor-images";
 
 type Props = {
   slides: InstructorImage[];
+  /** Side-by-side panel: single portrait column (left). Default: horizontal swipe row. */
+  layout?: "carousel" | "split";
 };
 
-export function FeaturedInstructorsCarousel({ slides }: Props) {
+function InstructorPhoto({
+  slide,
+  priority,
+  sizes,
+}: {
+  slide: InstructorImage;
+  priority?: boolean;
+  sizes: string;
+}) {
+  return (
+    <div
+      className="relative aspect-[3/4] w-full overflow-hidden rounded-2xl border bg-muted shadow-sm"
+      style={{ borderColor: "var(--border)" }}
+    >
+      <Image
+        src={slide.src}
+        alt={slide.alt}
+        fill
+        priority={priority}
+        sizes={sizes}
+        className="object-contain object-center p-1 sm:p-2"
+      />
+    </div>
+  );
+}
+
+function InstructorCaption({ slide }: { slide: InstructorImage }) {
+  return (
+    <figcaption className="mt-3 space-y-1.5 text-center">
+      <p
+        className="text-base font-semibold"
+        style={{ color: "var(--foreground)" }}
+      >
+        {slide.name}
+      </p>
+      {slide.instagram ? (
+        <a
+          href={slide.instagram}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-block text-sm font-medium underline underline-offset-4 transition-opacity hover:opacity-80"
+          style={{ color: "var(--primary)" }}
+        >
+          Follow me on Instagram
+        </a>
+      ) : null}
+      {slide.social ? (
+        <a
+          href={slide.social}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-block text-sm font-medium underline underline-offset-4 transition-opacity hover:opacity-80"
+          style={{ color: "var(--primary)" }}
+        >
+          {slide.socialLabel ?? "Social Media"}
+        </a>
+      ) : null}
+    </figcaption>
+  );
+}
+
+function SplitControls({
+  count,
+  activeIndex,
+  onSelect,
+  onPrev,
+  onNext,
+  instructorName,
+}: {
+  count: number;
+  activeIndex: number;
+  onSelect: (index: number) => void;
+  onPrev: () => void;
+  onNext: () => void;
+  instructorName?: string;
+}) {
+  if (count <= 1) return null;
+  return (
+    <div className="mt-4 flex items-center justify-center gap-3">
+      <button
+        type="button"
+        onMouseDown={(e) => e.preventDefault()}
+        onClick={onPrev}
+        disabled={activeIndex === 0}
+        aria-label={`Previous instructor${instructorName ? ` (before ${instructorName})` : ""}`}
+        className="inline-flex h-10 w-10 items-center justify-center rounded-full border bg-background text-foreground transition-opacity disabled:cursor-not-allowed disabled:opacity-40"
+        style={{ borderColor: "var(--border)" }}
+      >
+        <svg
+          viewBox="0 0 24 24"
+          aria-hidden
+          className="h-5 w-5"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M15 18l-6-6 6-6" />
+        </svg>
+      </button>
+      <div
+        className="flex items-center gap-2"
+        role="tablist"
+        aria-label="Instructor photos"
+      >
+        {Array.from({ length: count }, (_, index) => {
+          const isActive = index === activeIndex;
+          return (
+            <button
+              key={index}
+              type="button"
+              role="tab"
+              aria-selected={isActive}
+              aria-label={`View instructor ${index + 1}`}
+              onMouseDown={(e) => e.preventDefault()}
+              onClick={() => onSelect(index)}
+              className="h-2 rounded-full transition-all"
+              style={{
+                width: isActive ? "1.75rem" : "0.5rem",
+                backgroundColor: isActive ? "var(--primary)" : "var(--border)",
+              }}
+            />
+          );
+        })}
+      </div>
+      <button
+        type="button"
+        onMouseDown={(e) => e.preventDefault()}
+        onClick={onNext}
+        disabled={activeIndex === count - 1}
+        aria-label={`Next instructor${instructorName ? ` (after ${instructorName})` : ""}`}
+        className="inline-flex h-10 w-10 items-center justify-center rounded-full border bg-background text-foreground transition-opacity disabled:cursor-not-allowed disabled:opacity-40"
+        style={{ borderColor: "var(--border)" }}
+      >
+        <svg
+          viewBox="0 0 24 24"
+          aria-hidden
+          className="h-5 w-5"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M9 6l6 6-6 6" />
+        </svg>
+      </button>
+    </div>
+  );
+}
+
+function InstructorBio({ slide }: { slide: InstructorImage }) {
+  if (!slide.bio.length) return null;
+  return (
+    <div
+      className="h-full space-y-4 rounded-xl border p-5 text-justify hyphens-auto sm:p-6 lg:min-h-full"
+      style={{
+        fontSize: "1.05rem",
+        lineHeight: 1.75,
+        color: "var(--muted-foreground)",
+        borderColor: "var(--border)",
+        backgroundColor: "var(--muted)",
+      }}
+    >
+      {slide.greeting ? (
+        <p
+          className="text-left font-semibold"
+          style={{ fontSize: "1.15rem", color: "var(--foreground)" }}
+        >
+          {slide.greeting}
+        </p>
+      ) : null}
+      {slide.bio.map((paragraph, i) => (
+        <p key={i} className="text-pretty">
+          {paragraph}
+        </p>
+      ))}
+    </div>
+  );
+}
+
+function SplitInstructorPanel({ slides }: { slides: InstructorImage[] }) {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const panelRef = useRef<HTMLDivElement>(null);
+  const slide = slides[activeIndex];
+
+  const scrollPanelIntoView = useCallback(() => {
+    panelRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, []);
+
+  const goToIndex = useCallback(
+    (index: number) => {
+      setActiveIndex(index);
+      requestAnimationFrame(() => scrollPanelIntoView());
+    },
+    [scrollPanelIntoView],
+  );
+
+  if (!slide) return null;
+
+  return (
+    <div className="w-full">
+      <div
+        ref={panelRef}
+        className="scroll-mt-28 grid items-start gap-8 lg:grid-cols-[minmax(15rem,20rem)_1fr] lg:gap-10"
+      >
+        <figure className="mx-auto w-full max-w-[20rem] lg:mx-0">
+          <InstructorPhoto
+            slide={slide}
+            priority={activeIndex === 0}
+            sizes="(max-width: 1024px) 85vw, 20rem"
+          />
+          <InstructorCaption slide={slide} />
+        </figure>
+        <InstructorBio slide={slide} />
+      </div>
+      <SplitControls
+        count={slides.length}
+        activeIndex={activeIndex}
+        onSelect={goToIndex}
+        onPrev={() => goToIndex(Math.max(0, activeIndex - 1))}
+        onNext={() => goToIndex(Math.min(slides.length - 1, activeIndex + 1))}
+        instructorName={slide.name}
+      />
+    </div>
+  );
+}
+
+export function FeaturedInstructorsCarousel({
+  slides,
+  layout = "carousel",
+}: Props) {
   const trackRef = useRef<HTMLDivElement | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -30,6 +264,7 @@ export function FeaturedInstructorsCarousel({ slides }: Props) {
   }, [activeIndex, scrollToIndex, slides.length]);
 
   useEffect(() => {
+    if (layout === "split") return;
     const track = trackRef.current;
     if (!track) return;
 
@@ -55,11 +290,13 @@ export function FeaturedInstructorsCarousel({ slides }: Props) {
     handler();
     track.addEventListener("scroll", handler, { passive: true });
     return () => track.removeEventListener("scroll", handler);
-  }, [slides.length]);
+  }, [layout, slides.length]);
 
   if (!slides.length) return null;
 
-  const showControls = slides.length > 1;
+  if (layout === "split") {
+    return <SplitInstructorPanel slides={slides} />;
+  }
 
   return (
     <div className="relative mt-8">
@@ -80,106 +317,23 @@ export function FeaturedInstructorsCarousel({ slides }: Props) {
             className="snap-center shrink-0 grow-0"
             style={{ flexBasis: "min(18rem, 78%)" }}
           >
-            <div
-              className="overflow-hidden rounded-2xl border bg-muted shadow-sm"
-              style={{ borderColor: "var(--border)" }}
-            >
-              <Image
-                src={slide.src}
-                alt={slide.alt}
-                width={slide.width}
-                height={slide.height}
-                priority={index === 0}
-                sizes="(max-width: 640px) 78vw, (max-width: 1024px) 42vw, 18rem"
-                className="block h-auto max-h-[min(70vh,32rem)] w-full object-cover object-top"
-              />
-            </div>
-            {slide.label ? (
-              <figcaption
-                className="mt-2 text-center text-sm font-medium"
-                style={{ color: "var(--muted-foreground)" }}
-              >
-                {slide.label}
-              </figcaption>
-            ) : null}
+            <InstructorPhoto
+              slide={slide}
+              priority={index === 0}
+              sizes="(max-width: 640px) 78vw, (max-width: 1024px) 42vw, 18rem"
+            />
+            <InstructorCaption slide={slide} />
           </figure>
         ))}
       </div>
 
-      {showControls ? (
-        <div className="mt-4 flex items-center justify-center gap-3">
-          <button
-            type="button"
-            onClick={goPrev}
-            disabled={activeIndex === 0}
-            aria-label="Previous instructor"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full border bg-background text-foreground transition-opacity disabled:cursor-not-allowed disabled:opacity-40"
-            style={{ borderColor: "var(--border)" }}
-          >
-            <svg
-              viewBox="0 0 24 24"
-              aria-hidden
-              className="h-5 w-5"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M15 18l-6-6 6-6" />
-            </svg>
-          </button>
-
-          <div
-            className="flex items-center gap-2"
-            role="tablist"
-            aria-label="Instructor photos"
-          >
-            {slides.map((slide, index) => {
-              const isActive = index === activeIndex;
-              return (
-                <button
-                  key={slide.src}
-                  type="button"
-                  role="tab"
-                  aria-selected={isActive}
-                  aria-label={`View ${slide.label}`}
-                  onClick={() => scrollToIndex(index)}
-                  className="h-2 rounded-full transition-all"
-                  style={{
-                    width: isActive ? "1.75rem" : "0.5rem",
-                    backgroundColor: isActive
-                      ? "var(--primary)"
-                      : "var(--border)",
-                  }}
-                />
-              );
-            })}
-          </div>
-
-          <button
-            type="button"
-            onClick={goNext}
-            disabled={activeIndex === slides.length - 1}
-            aria-label="Next instructor"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full border bg-background text-foreground transition-opacity disabled:cursor-not-allowed disabled:opacity-40"
-            style={{ borderColor: "var(--border)" }}
-          >
-            <svg
-              viewBox="0 0 24 24"
-              aria-hidden
-              className="h-5 w-5"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M9 6l6 6-6 6" />
-            </svg>
-          </button>
-        </div>
-      ) : null}
+      <SplitControls
+        count={slides.length}
+        activeIndex={activeIndex}
+        onSelect={scrollToIndex}
+        onPrev={goPrev}
+        onNext={goNext}
+      />
     </div>
   );
 }

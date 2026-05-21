@@ -1,0 +1,33 @@
+{
+  "order": ["Dima Q 1.jpg", "Tracy.png", "Manjulika.png"],
+  "instructors": {
+    "Dima Q 1.jpg": {
+      "name": "Dima Al Malakeh",
+      "instagram": "https://www.instagram.com/queen.yoga.pt?igsh=dXRnejV0Z2pmcWVj",
+      "greeting": "Namaste:",
+      "bio": [
+        "As a Certified yoga teacher and personal trainer with a passion for movement, anatomy, and holistic wellbeing. With experience leading HIIT, LBT, Spinning, Pilates, and yoga classes, Dima brings a dynamic yet mindful approach to every session.",
+        "Deeply fascinated by the human body and the connection between movement, breath, and internal awareness, Dima's teaching focuses on helping people move better, feel stronger, and develop a deeper understanding of themselves. Influenced by previous experience in Pranic Healing, her practice blends physical training with mindful awareness, creating classes that are both energising and restorative.",
+        "At SIYD 26, Dima will be leading an uplifting Power Yoga session designed to build strength, mobility, and body awareness through breath-led movement. Expect an energising flow that challenges the body while encouraging focus, balance, and connection suitable for both experienced yogis and those looking to explore a more dynamic style of yoga."
+      ]
+    },
+    "Tracy.png": {
+      "name": "Tracy Lee Stasbourg",
+      "instagram": "https://www.instagram.com/missmindfulyoga/",
+      "bio": [
+        "I began practicing yoga in 1995, and quickly discovered its transformative impact when my lifelong mild asthma disappeared. After years of dedicated daily practice, I travelled to India in 2002 to complete an immersive teacher training at the Sivananda Ashram in Kerala, an experience that profoundly changed the course of my life.",
+        "Although I hadn't planned to leave my career, within two years I was teaching yoga full time across London. Since then, I've continued to study with respected teachers from around the world, deepening a lifelong commitment to practice, awareness, and living in alignment with our dharma."
+      ]
+    },
+    "Manjulika.png": {
+      "name": "Manjulika Singh MBE",
+      "social": "https://www.facebook.com/share/1BzRJe7ZtV/",
+      "socialLabel": "Social Media",
+      "bio": [
+        "Manjulika Singh MBE has been teaching yoga for over 20 years, sharing the transformative benefits of the practice with people of all ages and abilities. Specialising in Hatha Yoga, Pregnancy Yoga, and Chair Yoga, her teaching is rooted in creating accessible, supportive, and nurturing environments where everyone can experience the physical and mental benefits of yoga.",
+        "Known for her calm and compassionate approach, Manjulika's classes focus on mindful movement, breath awareness, and overall wellbeing. Whether supporting expectant mothers through Pregnancy Yoga, helping individuals improve mobility and confidence through Chair Yoga, or guiding students through traditional Hatha Yoga practices, she brings decades of experience and dedication to every session.",
+        "At SIYD26, Manjulika Singh MBE will be leading a welcoming Chair Yoga session designed to make yoga accessible to all. Focusing on gentle movement, flexibility, breathwork, and relaxation, the session is ideal for beginners, older adults, or anyone looking to experience the benefits of yoga in a supportive and inclusive way."
+      ]
+    }
+  }
+}
