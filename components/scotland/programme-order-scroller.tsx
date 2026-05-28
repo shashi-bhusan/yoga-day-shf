@@ -8,18 +8,21 @@ type Slide = {
   alt: string;
 };
 
+const PROGRAMME_IMAGE_WIDTH = 1414;
+const PROGRAMME_IMAGE_HEIGHT = 2000;
+
 const slides: Slide[] = [
   {
-    src: "/images/event/programme/yoga-3.jpg",
-    alt: "Programme order — page 1",
+    src: "/images/sections/Pyramid.png",
+    alt: "Programme order — The Pyramid at Anderston",
   },
   {
-    src: "/images/event/programme/yoga-2.jpg",
-    alt: "Programme order — page 2",
+    src: "/images/sections/Lotus.png",
+    alt: "Programme order — The Lotus Hall",
   },
   {
-    src: "/images/event/programme/yoga-1.jpg",
-    alt: "Programme order — page 3",
+    src: "/images/sections/Shanti.png",
+    alt: "Programme order — The Shanti Hall",
   },
 ];
 
@@ -73,12 +76,12 @@ export function ProgrammeOrderScroller() {
   }, []);
 
   return (
-    <div className="relative">
+    <div className="relative min-w-0 max-w-full overflow-hidden">
       <div
         ref={trackRef}
         role="region"
         aria-label="Programme order — swipe between pages"
-        className="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth pb-4 sm:gap-6"
+        className="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth pb-4 [-ms-overflow-style:none] [scrollbar-width:thin] sm:gap-6"
         style={{
           scrollPaddingInline: "1rem",
           scrollbarWidth: "thin",
@@ -88,9 +91,9 @@ export function ProgrammeOrderScroller() {
           <figure
             key={slide.src}
             data-slide
-            className="snap-center shrink-0 grow-0"
+            className="min-w-0 shrink-0 grow-0 snap-center"
             style={{
-              flexBasis: "min(28rem, 88%)",
+              flexBasis: "min(28rem, min(88vw, 100%))",
             }}
           >
             <div
@@ -100,8 +103,8 @@ export function ProgrammeOrderScroller() {
               <Image
                 src={slide.src}
                 alt={slide.alt}
-                width={1131}
-                height={1600}
+                width={PROGRAMME_IMAGE_WIDTH}
+                height={PROGRAMME_IMAGE_HEIGHT}
                 priority={index === 0}
                 sizes="(max-width: 640px) 88vw, (max-width: 1024px) 60vw, 28rem"
                 className="block h-auto w-full object-contain"
