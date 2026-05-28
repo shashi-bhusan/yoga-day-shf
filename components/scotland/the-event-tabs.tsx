@@ -296,19 +296,15 @@ export function TheEventTabs() {
           role="tabpanel"
           id={`${baseId}-panel-instructors`}
           aria-labelledby={`${baseId}-instructors`}
-          className="rounded-2xl border p-4 sm:p-8 md:p-10"
+          className="min-w-0 overflow-hidden rounded-2xl border p-4 sm:p-8 md:p-10"
           style={{
             borderColor: "var(--border)",
             backgroundColor: "var(--background)",
           }}
         >
           <h3
-            className="mb-4"
-            style={{
-              fontSize: "1.5rem",
-              fontWeight: 700,
-              color: "var(--primary)",
-            }}
+            className="mb-4 text-pretty text-xl font-bold sm:text-2xl"
+            style={{ color: "var(--primary)" }}
           >
             Featured instructors
           </h3>

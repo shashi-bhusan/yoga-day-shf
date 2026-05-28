@@ -38,9 +38,9 @@ function InstructorPhoto({
 
 function InstructorCaption({ slide }: { slide: InstructorImage }) {
   return (
-    <figcaption className="mt-3 space-y-1.5 text-center">
+    <figcaption className="mt-3 space-y-1.5 px-1 text-center">
       <p
-        className="text-base font-semibold"
+        className="text-pretty text-base font-semibold leading-snug break-words sm:text-[1.05rem]"
         style={{ color: "var(--foreground)" }}
       >
         {slide.name}
@@ -50,7 +50,7 @@ function InstructorCaption({ slide }: { slide: InstructorImage }) {
           href={slide.instagram}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-block text-sm font-medium underline underline-offset-4 transition-opacity hover:opacity-80"
+          className="inline-block max-w-full text-sm font-medium underline underline-offset-4 transition-opacity hover:opacity-80"
           style={{ color: "var(--primary)" }}
         >
           Follow me on Instagram
@@ -61,7 +61,7 @@ function InstructorCaption({ slide }: { slide: InstructorImage }) {
           href={slide.social}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-block text-sm font-medium underline underline-offset-4 transition-opacity hover:opacity-80"
+          className="inline-block max-w-full text-sm font-medium underline underline-offset-4 transition-opacity hover:opacity-80"
           style={{ color: "var(--primary)" }}
         >
           {slide.socialLabel ?? "Social Media"}
@@ -87,15 +87,18 @@ function SplitControls({
   instructorName?: string;
 }) {
   if (count <= 1) return null;
+
+  const compactDots = count > 4;
+
   return (
-    <div className="mt-4 flex items-center justify-center gap-3">
+    <div className="mt-4 flex w-full max-w-full items-center justify-center gap-2 px-1 sm:mt-5 sm:gap-3">
       <button
         type="button"
         onMouseDown={(e) => e.preventDefault()}
         onClick={onPrev}
         disabled={activeIndex === 0}
         aria-label={`Previous instructor${instructorName ? ` (before ${instructorName})` : ""}`}
-        className="inline-flex h-10 w-10 items-center justify-center rounded-full border bg-background text-foreground transition-opacity disabled:cursor-not-allowed disabled:opacity-40"
+        className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border bg-background text-foreground transition-opacity disabled:cursor-not-allowed disabled:opacity-40 sm:h-10 sm:w-10"
         style={{ borderColor: "var(--border)" }}
       >
         <svg
@@ -111,30 +114,43 @@ function SplitControls({
           <path d="M15 18l-6-6 6-6" />
         </svg>
       </button>
-      <div
-        className="flex items-center gap-2"
-        role="tablist"
-        aria-label="Instructor photos"
-      >
-        {Array.from({ length: count }, (_, index) => {
-          const isActive = index === activeIndex;
-          return (
-            <button
-              key={index}
-              type="button"
-              role="tab"
-              aria-selected={isActive}
-              aria-label={`View instructor ${index + 1}`}
-              onMouseDown={(e) => e.preventDefault()}
-              onClick={() => onSelect(index)}
-              className="h-2 rounded-full transition-all"
-              style={{
-                width: isActive ? "1.75rem" : "0.5rem",
-                backgroundColor: isActive ? "var(--primary)" : "var(--border)",
-              }}
-            />
-          );
-        })}
+      <div className="flex min-w-0 flex-1 flex-col items-center gap-1 sm:max-w-none sm:flex-initial">
+        <p
+          className="text-xs font-medium tabular-nums sm:hidden"
+          style={{ color: "var(--muted-foreground)" }}
+          aria-live="polite"
+        >
+          {activeIndex + 1} of {count}
+        </p>
+        <div
+          className="flex max-w-full items-center justify-center gap-1.5 overflow-x-auto py-0.5 [-ms-overflow-style:none] [scrollbar-width:none] sm:gap-2 [&::-webkit-scrollbar]:hidden"
+          role="tablist"
+          aria-label="Instructor photos"
+        >
+          {Array.from({ length: count }, (_, index) => {
+            const isActive = index === activeIndex;
+            return (
+              <button
+                key={index}
+                type="button"
+                role="tab"
+                aria-selected={isActive}
+                aria-label={`View instructor ${index + 1} of ${count}`}
+                onMouseDown={(e) => e.preventDefault()}
+                onClick={() => onSelect(index)}
+                className="h-2 shrink-0 rounded-full transition-all"
+                style={{
+                  width: isActive
+                    ? compactDots
+                      ? "1.25rem"
+                      : "1.75rem"
+                    : "0.5rem",
+                  backgroundColor: isActive ? "var(--primary)" : "var(--border)",
+                }}
+              />
+            );
+          })}
+        </div>
       </div>
       <button
         type="button"
@@ -142,7 +158,7 @@ function SplitControls({
         onClick={onNext}
         disabled={activeIndex === count - 1}
         aria-label={`Next instructor${instructorName ? ` (after ${instructorName})` : ""}`}
-        className="inline-flex h-10 w-10 items-center justify-center rounded-full border bg-background text-foreground transition-opacity disabled:cursor-not-allowed disabled:opacity-40"
+        className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border bg-background text-foreground transition-opacity disabled:cursor-not-allowed disabled:opacity-40 sm:h-10 sm:w-10"
         style={{ borderColor: "var(--border)" }}
       >
         <svg
@@ -166,10 +182,8 @@ function InstructorBio({ slide }: { slide: InstructorImage }) {
   if (!slide.bio.length) return null;
   return (
     <div
-      className="h-full space-y-4 rounded-xl border p-5 text-justify hyphens-auto sm:p-6 lg:min-h-full"
+      className="min-w-0 space-y-3 rounded-xl border p-4 text-left text-sm leading-relaxed hyphens-auto sm:space-y-4 sm:p-5 sm:text-base sm:leading-7 sm:text-justify md:p-6 lg:min-h-full"
       style={{
-        fontSize: "1.05rem",
-        lineHeight: 1.75,
         color: "var(--muted-foreground)",
         borderColor: "var(--border)",
         backgroundColor: "var(--muted)",
@@ -177,8 +191,8 @@ function InstructorBio({ slide }: { slide: InstructorImage }) {
     >
       {slide.greeting ? (
         <p
-          className="text-left font-semibold"
-          style={{ fontSize: "1.15rem", color: "var(--foreground)" }}
+          className="text-left text-base font-semibold sm:text-[1.15rem]"
+          style={{ color: "var(--foreground)" }}
         >
           {slide.greeting}
         </p>
@@ -212,16 +226,16 @@ function SplitInstructorPanel({ slides }: { slides: InstructorImage[] }) {
   if (!slide) return null;
 
   return (
-    <div className="w-full">
+    <div className="min-w-0 w-full max-w-full overflow-hidden">
       <div
         ref={panelRef}
-        className="scroll-mt-28 grid items-start gap-8 lg:grid-cols-[minmax(15rem,20rem)_1fr] lg:gap-10"
+        className="scroll-mt-28 grid min-w-0 grid-cols-1 items-start gap-6 sm:gap-8 md:grid-cols-[minmax(0,14rem)_minmax(0,1fr)] md:gap-8 lg:grid-cols-[minmax(12rem,20rem)_minmax(0,1fr)] lg:gap-10"
       >
-        <figure className="mx-auto w-full max-w-[20rem] lg:mx-0">
+        <figure className="mx-auto w-full min-w-0 max-w-[min(100%,16rem)] sm:max-w-[18rem] md:mx-0 md:max-w-none">
           <InstructorPhoto
             slide={slide}
             priority={activeIndex === 0}
-            sizes="(max-width: 1024px) 85vw, 20rem"
+            sizes="(max-width: 768px) min(85vw, 16rem), (max-width: 1024px) 14rem, 20rem"
           />
           <InstructorCaption slide={slide} />
         </figure>
