@@ -13,7 +13,7 @@ const PROGRAMME_IMAGE_HEIGHT = 2000;
 
 const slides: Slide[] = [
   {
-    src: "/images/sections/Pyramid.png",
+    src: "/images/sections/Pyramid-1.jpeg",
     alt: "Programme order — The Pyramid at Anderston",
   },
   {
