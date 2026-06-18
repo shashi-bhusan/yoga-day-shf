@@ -13,15 +13,15 @@ const PROGRAMME_IMAGE_HEIGHT = 2000;
 
 const slides: Slide[] = [
   {
-    src: "/images/sections/Pyramid-1.jpeg",
+    src: "/images/sections/programme-pyramid.png",
     alt: "Programme order — The Pyramid at Anderston",
   },
   {
-    src: "/images/sections/Lotus.png",
+    src: "/images/sections/programme-lotus.png",
     alt: "Programme order — The Lotus Hall",
   },
   {
-    src: "/images/sections/Shanti.png",
+    src: "/images/sections/programme-shanti.png",
     alt: "Programme order — The Shanti Hall",
   },
 ];
